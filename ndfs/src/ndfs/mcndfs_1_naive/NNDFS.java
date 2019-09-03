@@ -7,7 +7,7 @@ import ndfs.NDFS;
 
 /**
  * Implements the {@link ndfs.NDFS} interface, mostly delegating the work to a
- * worker class.
+ * worker class. max was here
  */
 public class NNDFS implements NDFS {
 
