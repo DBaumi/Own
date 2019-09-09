@@ -3,7 +3,7 @@ package example_threads;
 public class Main {
 
     // Creates a thread pool, starts a number of tasks, sleeps for a while,
-    // and then tries to terminate the threads.
+    // and then tries to terminate the threads. test comment
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println(
