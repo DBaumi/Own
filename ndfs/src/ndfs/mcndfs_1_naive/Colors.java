@@ -12,12 +12,12 @@ public class Colors {
 
     private final Map<State, Color> map = new HashMap<State, Color>();
     /* map that indicates whether a state is pink*/
-    private final Map<java.awt.Taskbar.State, Boolean> pink = new HashMap<State, Boolean>();
+    private final Map<graph.State, Boolean> pink = new HashMap<graph.State, Boolean>();
 
 
     public Colors()
     {
-        pink.ValueSet().forEach((Boolean x) -> (x= false)); // init all states as not pink
+        pink.keySet().forEach(x -> pink.put(x,false) ); // init all states as not pink
     }
 
     /**
