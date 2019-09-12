@@ -2,6 +2,8 @@ package ndfs.mcndfs_1_naive;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import graph.Graph;
 import graph.GraphFactory;
@@ -18,6 +20,12 @@ public class Worker {
     private final Colors colors = new Colors();
     private boolean result = false;
 
+    // map of red states shared between threads
+    public ConcurrentHashMap<graph.State, Boolean> red_states;
+
+    //number of threads that called dfsRed() on the state; also shared
+    public ConcurrentHashMap<graph.State, AtomicInteger> thread_count;
+
     // Throwing an exception is a convenient way to cut off the search in case a
     // cycle is found.
     private static class CycleFoundException extends Exception {
@@ -27,42 +35,51 @@ public class Worker {
     /**
      * Constructs a Worker object using the specified Promela file.
      *
-     * @param promelaFile
-     *            the Promela file.
-     * @throws FileNotFoundException
-     *             is thrown in case the file could not be read.
+     * @param promelaFile the Promela file.
+     * @throws FileNotFoundException is thrown in case the file could not be read.
      */
-    public Worker(File promelaFile) throws FileNotFoundException {
+    public Worker(File promelaFile, ConcurrentHashMap red_states, ConcurrentHashMap thread_count) throws FileNotFoundException {
 
         this.graph = GraphFactory.createGraph(promelaFile);
+        this.red_states = red_states;
+        this.thread_count = thread_count;
     }
 
     private void dfsRed(State s) throws CycleFoundException {
 
+        colors.setPink(s,true);
         for (State t : graph.post(s)) {
             if (colors.hasColor(t, Color.CYAN)) {
                 throw new CycleFoundException();
-            } else if (colors.hasColor(t, Color.BLUE)) {
-                colors.color(t, Color.RED);
+            } else if (!colors.isPink(s) && !red_states.get(s)) { // if state isnt red or pink
+                
                 dfsRed(t);
             }
         }
+
+        if (s.isAccepting()){
+            thread_count.get(s).decrementAndGet();
+            while (thread_count.get(s).get() > 0 ){} // wait until value is 0 again before continuing
+
+        }
+        red_states.put(s, true);
+        colors.setPink(s,false);
     }
 
     private void dfsBlue(State s) throws CycleFoundException {
 
         colors.color(s, Color.CYAN);
         for (State t : graph.post(s)) {
-            if (colors.hasColor(t, Color.WHITE)) {
+            if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
                 dfsBlue(t);
             }
         }
         if (s.isAccepting()) {
+            thread_count.get(s).addAndGet(1);
             dfsRed(s);
-            colors.color(s, Color.RED);
-        } else {
-            colors.color(s, Color.BLUE);
-        }
+        } 
+        colors.color(s, Color.BLUE);
+        
     }
 
     private void nndfs(State s) throws CycleFoundException {

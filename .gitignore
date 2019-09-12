@@ -1,3 +1,6 @@
 .vscode/settings.json
 
 *.class
+ndfs/.vscode/settings.json
+
+ndfs/build/jar/ndfs\.jar

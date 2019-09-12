@@ -61,8 +61,8 @@ public class Colors {
         return pink.get(state);
     }
 
-    public void setPink(State state)
+    public void setPink(State state, boolean bool)
     {
-        pink.put(state, true);
+        pink.put(state, bool);
     }
 }
