@@ -15,11 +15,7 @@ public class Colors {
     private final Map<graph.State, Boolean> pink = new HashMap<graph.State, Boolean>();
 
 
-    public Colors()
-    {
-        pink.keySet().forEach(x -> pink.put(x,false) ); // init all states as not pink
-    }
-
+    
     /**
      * Returns <code>true</code> if the specified state has the specified color,
      * <code>false</code> otherwise.
@@ -58,7 +54,10 @@ public class Colors {
 
     public boolean isPink(State state)
     {
-        return pink.get(state);
+        if (pink.get(state) == null)
+            return false;
+        else
+            return pink.get(state);
     }
 
     public void setPink(State state, boolean bool)
