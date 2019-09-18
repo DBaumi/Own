@@ -4,6 +4,7 @@ package ndfs.mcndfs_1_naive;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Stack;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,7 +19,7 @@ import ndfs.NDFS;
  */
 public class NNDFS implements NDFS {
 
-    private final Worker worker;
+    private final Worker[] workers;
 
     // map of red states shared between threads
     public ConcurrentHashMap<graph.State, Boolean> red_states = new ConcurrentHashMap<>();
@@ -53,12 +54,37 @@ public class NNDFS implements NDFS {
         }
         
 
-        this.worker = new Worker(promelaFile, red_states, thread_count);
+        this.workers = new Worker[num_worker];
+        for (int i=0; i< num_worker;i ++)
+        {
+            this.workers[i] = new Worker(promelaFile, red_states, thread_count);
+        }
     }
 
     @Override
     public boolean ndfs() {
-        worker.run();
-        return worker.getResult();
+       for (Worker w: workers)
+       {
+           w.start();
+       }
+       ArrayList<Boolean> results = new ArrayList<>();
+       for (Worker w: workers)
+       {
+           try{
+            w.join();
+            results.add(w.getResult());
+           }
+           catch (InterruptedException e)
+           {
+               System.err.println("thread " + w.toString() +" was interrupted");
+           }
+       }
+
+       for (boolean r : results)
+       {
+           if (r)
+            return true;
+       }
+       return false;
     }
 }

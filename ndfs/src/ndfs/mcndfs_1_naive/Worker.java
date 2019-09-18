@@ -14,7 +14,7 @@ import graph.State;
  * <a href="http://www.cs.vu.nl/~tcs/cm/ndfs/laarman.pdf"> "the Laarman
  * paper"</a>.
  */
-public class Worker {
+public class Worker extends Thread{
 
     private final Graph graph;
     private final Colors colors = new Colors();
@@ -45,10 +45,10 @@ public class Worker {
         this.thread_count = thread_count;
     }
 
-    private void dfsRed(State s) throws CycleFoundException {
+    private void dfsRed(graph.State s) throws CycleFoundException {
 
         colors.setPink(s,true);
-        for (State t : graph.post(s)) {
+        for (graph.State t : graph.post(s)) {
             if (colors.hasColor(t, Color.CYAN)) {
                 throw new CycleFoundException();
             } else if (!colors.isPink(s) && !red_states.get(s)) { // if state isnt red or pink
@@ -66,10 +66,10 @@ public class Worker {
         colors.setPink(s,false);
     }
 
-    private void dfsBlue(State s) throws CycleFoundException {
+    private void dfsBlue(graph.State s) throws CycleFoundException {
 
         colors.color(s, Color.CYAN);
-        for (State t : graph.post(s)) {
+        for (graph.State t : graph.post(s)) {
             if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
                 dfsBlue(t);
             }
@@ -82,11 +82,13 @@ public class Worker {
         
     }
 
-    private void nndfs(State s) throws CycleFoundException {
+    private void nndfs(graph.State s) throws CycleFoundException {
         dfsBlue(s);
     }
 
+    @Override
     public void run() {
+        System.out.println("Thread running");
         try {
             nndfs(graph.getInitialState());
         } catch (CycleFoundException e) {
