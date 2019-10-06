@@ -2,6 +2,8 @@ package ndfs.mcndfs_1_naive;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -48,10 +50,12 @@ public class Worker extends Thread{
     private void dfsRed(graph.State s) throws CycleFoundException {
 
         colors.setPink(s,true);
-        for (graph.State t : graph.post(s)) {
+        List<graph.State> post_states = graph.post(s); 
+        Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
+        for (graph.State t : post_states) {
             if (colors.hasColor(t, Color.CYAN)) {
                 throw new CycleFoundException();
-            } else if (!colors.isPink(s) && !red_states.get(s)) { // if state isnt red or pink
+            } else if (!colors.isPink(t) && !red_states.get(t)) { // if state isnt red or pink
                 
                 dfsRed(t);
             }
@@ -69,7 +73,9 @@ public class Worker extends Thread{
     private void dfsBlue(graph.State s) throws CycleFoundException {
 
         colors.color(s, Color.CYAN);
-        for (graph.State t : graph.post(s)) {
+        List<graph.State> post_states = graph.post(s); 
+        Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
+        for (graph.State t :post_states) {
             if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
                 dfsBlue(t);
             }
