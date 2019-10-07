@@ -26,6 +26,8 @@ public class NNDFS implements NDFS {
     // number of threads that called dfsRed() on the state; also shared
     public ConcurrentHashMap<graph.State, AtomicInteger> thread_count = new ConcurrentHashMap<>();
 
+   
+
     /**
      * Constructs an NDFS object using the specified Promela file.
      *
@@ -76,7 +78,7 @@ public class NNDFS implements NDFS {
            }
            catch (InterruptedException e)
            {
-               System.err.println("thread " + w.toString() +" was interrupted");
+               System.err.println("thread " + w.getId() + " was interrupted");
            }
        }
 

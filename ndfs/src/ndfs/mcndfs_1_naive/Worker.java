@@ -21,6 +21,7 @@ public class Worker extends Thread{
     private final Graph graph;
     private final Colors colors = new Colors();
     private boolean result = false;
+    public volatile static boolean terminate= false; //defined for class should be visible to all threads
 
     // map of red states shared between threads
     public ConcurrentHashMap<graph.State, Boolean> red_states;
@@ -45,50 +46,64 @@ public class Worker extends Thread{
         this.graph = GraphFactory.createGraph(promelaFile);
         this.red_states = red_states;
         this.thread_count = thread_count;
-    }
-
-    private void dfsRed(graph.State s) throws CycleFoundException {
-
-        colors.setPink(s,true);
-        List<graph.State> post_states = graph.post(s); 
-        Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
-        for (graph.State t : post_states) {
-            if (colors.hasColor(t, Color.CYAN)) {
-                throw new CycleFoundException();
-            } else if (!colors.isPink(t) && !red_states.get(t)) { // if state isnt red or pink
-                
-                dfsRed(t);
-            }
-        }
-
-        if (s.isAccepting()){
-            thread_count.get(s).decrementAndGet();
-            while (thread_count.get(s).get() > 0 ){} // wait until value is 0 again before continuing
-
-        }
-        red_states.put(s, true);
-        colors.setPink(s,false);
-    }
-
-    private void dfsBlue(graph.State s) throws CycleFoundException {
-
-        colors.color(s, Color.CYAN);
-        List<graph.State> post_states = graph.post(s); 
-        Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
-        for (graph.State t :post_states) {
-            if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
-                dfsBlue(t);
-            }
-        }
-        if (s.isAccepting()) {
-            thread_count.get(s).addAndGet(1);
-            dfsRed(s);
-        } 
-        colors.color(s, Color.BLUE);
         
     }
 
-    private void nndfs(graph.State s) throws CycleFoundException {
+    private void dfsRed(graph.State s) throws CycleFoundException,InterruptedException {
+        if (terminate)
+        {
+            throw new InterruptedException(); // stop looking if another thread found a solution
+        }
+            colors.setPink(s,true);
+            List<graph.State> post_states = graph.post(s); 
+            Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
+            for (graph.State t : post_states) {
+                if (colors.hasColor(t, Color.CYAN)) {
+                    System.out.println("Cycle found in thread: " + this.getId());
+                    terminate = true; // let other threads know that we found a solution
+                    throw new CycleFoundException();
+                } else if (!colors.isPink(t) && !red_states.get(t)) { // if state isnt red or pink
+                    
+                    dfsRed(t);
+                }
+            }
+
+            if (s.isAccepting()){
+                thread_count.get(s).decrementAndGet();
+                while (thread_count.get(s).get() > 0 ){} // wait until value is 0 again before continuing
+
+            }
+            red_states.put(s, true);
+            colors.setPink(s,false);
+        
+    }
+        
+    
+
+    private void dfsBlue(graph.State s) throws CycleFoundException, InterruptedException{
+        if(terminate)
+        {
+            throw new InterruptedException(); // stop looking if another thread found a solution
+        }
+            colors.color(s, Color.CYAN);
+            List<graph.State> post_states = graph.post(s); 
+            Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
+            for (graph.State t :post_states) {
+                if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
+                    dfsBlue(t);
+                }
+            }
+            if (s.isAccepting()) {
+                thread_count.get(s).addAndGet(1);
+                dfsRed(s);
+            } 
+            colors.color(s, Color.BLUE);
+        
+    }
+        
+    
+
+    private void nndfs(graph.State s) throws CycleFoundException,InterruptedException {
         dfsBlue(s);
     }
 
@@ -99,7 +114,13 @@ public class Worker extends Thread{
             nndfs(graph.getInitialState());
         } catch (CycleFoundException e) {
             result = true;
+            
         }
+        catch (InterruptedException e)
+        {
+            System.out.println("Thread " + this.getId() + " was terminated");
+        }
+        terminate = true;
     }
 
     public boolean getResult() {
