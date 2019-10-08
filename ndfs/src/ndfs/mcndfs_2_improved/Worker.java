@@ -107,7 +107,7 @@ public class Worker extends Thread{
                 }
             }
             if (s.isAccepting()) {
-                thread_count.get(s).addAndGet(1);
+                thread_count.get(s).incrementAndGet();
                 dfsRed(s);
             } 
             colors.color(s, Color.BLUE);
