@@ -70,7 +70,20 @@ public class Worker extends Thread{
 
             if (s.isAccepting()){
                 thread_count.get(s).decrementAndGet();
-                while (thread_count.get(s).get() > 0 ){} // wait until value is 0 again before continuing
+                synchronized (thread_count.get(s))
+                {
+                    if (thread_count.get(s).get()==0)
+                    {
+                        thread_count.get(s).notifyAll();
+                        //System.out.println("Thread " +this.getId() + ": thread_count is 0");
+                    }
+                    else
+                    {
+                        //System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
+                        thread_count.get(s).wait();
+                    }
+                }
+                //while (thread_count.get(s).get() > 0 ){} wait until value is 0 again before continuing
 
             }
             red_states.put(s, true);
