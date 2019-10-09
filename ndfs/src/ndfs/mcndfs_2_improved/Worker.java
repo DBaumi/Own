@@ -68,11 +68,16 @@ public class Worker extends Thread{
                 }
             }
 
-            if (s.isAccepting()){
+            if (s.isAccepting())
+            {
+                if (thread_count.get(s)==null)
+                {
+                    thread_count.put(s,new AtomicInteger(0));
+                }
                 thread_count.get(s).decrementAndGet();
                 synchronized (thread_count.get(s))
                 {
-                    if (thread_count.get(s).get()==0)
+                    if (thread_count.get(s).get()<=0)
                     {
                         thread_count.get(s).notifyAll();
                         //System.out.println("Thread " +this.getId() + ": thread_count is 0");
@@ -106,7 +111,12 @@ public class Worker extends Thread{
                     dfsBlue(t);
                 }
             }
-            if (s.isAccepting()) {
+            if (s.isAccepting()) 
+            {
+                if (thread_count.get(s)==null)
+                {
+                    thread_count.put(s,new AtomicInteger(0));
+                }
                 thread_count.get(s).incrementAndGet();
                 dfsRed(s);
             } 

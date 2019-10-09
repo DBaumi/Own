@@ -36,7 +36,7 @@ public class NNDFS implements NDFS {
      */
     public NNDFS(File promelaFile, int num_worker) throws FileNotFoundException {
 
-        /**init hashmaps with default values by iterating over the graph with a stack */
+        /**init hashmaps with default values by iterating over the graph with a stack 
         Graph myGraph = GraphFactory.createGraph(promelaFile);
         State s = myGraph.getInitialState();
         Stack<State> stack = new Stack<State>();
@@ -52,7 +52,7 @@ public class NNDFS implements NDFS {
             {
                 stack.push(next);
             }
-        }
+        }*/
         
 
         this.workers = new Worker[num_worker];
