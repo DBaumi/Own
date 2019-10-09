@@ -56,7 +56,7 @@ public class Worker extends Thread{
         }
         if (thread_count.get(s)==null)
         {
-                    thread_count.put(s,new AtomicInteger(0));
+            thread_count.put(s,new AtomicInteger(0));
         }
             colors.setPink(s,true);
             List<graph.State> post_states = graph.post(s); 
@@ -78,8 +78,16 @@ public class Worker extends Thread{
                 thread_count.get(s).decrementAndGet();
                 synchronized (thread_count.get(s)) {
                 if (thread_count.get(s).get() <= 0) {
-                    thread_count.get(s).notifyAll();
+                    try
+                    {
+                        thread_count.get(s).notifyAll();
                     // System.out.println("Thread " +this.getId() + ": thread_count is 0");
+                    }
+                    catch(IllegalMonitorStateException e)
+                    {
+                        System.err.println("monitorexception in thread: " + this.getId());
+                    }
+                    
                 } 
                 else {
                     // System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
