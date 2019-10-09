@@ -62,7 +62,7 @@ public class Worker extends Thread{
                     System.out.println("Cycle found in thread: " + this.getId());
                     terminate = true; // let other threads know that we found a solution
                     throw new CycleFoundException();
-                } else if (!colors.isPink(t) && !red_states.get(t)) { // if state isnt red or pink
+                } else if (!colors.isPink(t) && red_states.get(t)==null) { // if state isnt red or pink
                     
                     dfsRed(t);
                 }
@@ -102,7 +102,7 @@ public class Worker extends Thread{
             List<graph.State> post_states = graph.post(s); 
             Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
             for (graph.State t :post_states) {
-                if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
+                if (colors.hasColor(t, Color.WHITE) && red_states.get(t)==null) { // if state is locally white and no other marked it red
                     dfsBlue(t);
                 }
             }

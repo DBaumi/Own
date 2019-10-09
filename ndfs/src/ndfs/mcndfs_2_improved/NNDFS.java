@@ -44,9 +44,8 @@ public class NNDFS implements NDFS {
         while (!stack.empty())
         {
             State current = stack.pop();
-            if (red_states.get(current)!= null) // check if we already visited this node
+            if (thread_count.get(current)!= null) // check if we already visited this node
                 continue;
-            red_states.put(current, false); // init map
             thread_count.put(current, new AtomicInteger(0)); // init map
             List<graph.State> next_states = myGraph.post(current);
             for (State next : next_states)
