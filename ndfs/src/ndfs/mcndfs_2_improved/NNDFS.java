@@ -35,27 +35,6 @@ public class NNDFS implements NDFS {
      * @throws FileNotFoundException is thrown in case the file could not be read.
      */
     public NNDFS(File promelaFile, int num_worker) throws FileNotFoundException {
-
-        /**init hashmaps with default values by iterating over the graph with a stack */
-        Graph myGraph = GraphFactory.createGraph(promelaFile);
-        State s = myGraph.getInitialState();
-        Stack<State> stack = new Stack<State>();
-        stack.push(s);
-        while (!stack.empty())
-        {
-            State current = stack.pop();
-            if (red_states.get(current)!= null) // check if we already visited this node
-                continue;
-            red_states.put(current, false); // init map
-            thread_count.put(current, new AtomicInteger(0)); // init map
-            List<graph.State> next_states = myGraph.post(current);
-            for (State next : next_states)
-            {
-                stack.push(next);
-            }
-        }
-        
-
         this.workers = new Worker[num_worker];
         for (int i=0; i< num_worker;i ++)
         {

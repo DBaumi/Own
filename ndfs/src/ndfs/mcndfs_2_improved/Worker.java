@@ -54,6 +54,10 @@ public class Worker extends Thread{
         {
             throw new InterruptedException(); // stop looking if another thread found a solution
         }
+        if (thread_count.get(s)==null)
+        {
+            thread_count.put(s,new AtomicInteger(0));
+        }
             colors.setPink(s,true);
             List<graph.State> post_states = graph.post(s); 
             Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
@@ -62,16 +66,36 @@ public class Worker extends Thread{
                     System.out.println("Cycle found in thread: " + this.getId());
                     terminate = true; // let other threads know that we found a solution
                     throw new CycleFoundException();
-                } else if (!colors.isPink(t) && !red_states.get(t)) { // if state isnt red or pink
+                } else if (!colors.isPink(t) && red_states.get(t)==null) { // if state isnt red or pink
                     
                     dfsRed(t);
                 }
             }
 
-            if (s.isAccepting()){
+            if (s.isAccepting())
+            {
+                
                 thread_count.get(s).decrementAndGet();
-                while (thread_count.get(s).get() > 0 ){} // wait until value is 0 again before continuing
-
+                synchronized (thread_count.get(s)) {
+                if (thread_count.get(s).get() <= 0) {
+                    try
+                    {
+                        thread_count.get(s).notifyAll();
+                    // System.out.println("Thread " +this.getId() + ": thread_count is 0");
+                    }
+                    catch(IllegalMonitorStateException e)
+                    {
+                        System.out.println("monitorexception in thread: " + this.getId());
+                    }
+                    
+                } 
+                else {
+                    // System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
+                    thread_count.get(s).wait();
+                }
+            }
+                //while (thread_count.get(s).get() > 0 ){} wait until value is 0 again before continuing
+                
             }
             red_states.put(s, true);
             colors.setPink(s,false);
@@ -85,16 +109,21 @@ public class Worker extends Thread{
         {
             throw new InterruptedException(); // stop looking if another thread found a solution
         }
+        if (thread_count.get(s)==null)
+        {
+             thread_count.put(s,new AtomicInteger(0));
+        }
             colors.color(s, Color.CYAN);
             List<graph.State> post_states = graph.post(s); 
             Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
             for (graph.State t :post_states) {
-                if (colors.hasColor(t, Color.WHITE) && !red_states.get(t)) { // if state is locally white and no other marked it red
+                if (colors.hasColor(t, Color.WHITE) && red_states.get(t)==null) { // if state is locally white and no other marked it red
                     dfsBlue(t);
                 }
             }
-            if (s.isAccepting()) {
-                thread_count.get(s).addAndGet(1);
+            if (s.isAccepting()) 
+            {
+                thread_count.get(s).incrementAndGet();
                 dfsRed(s);
             } 
             colors.color(s, Color.BLUE);
