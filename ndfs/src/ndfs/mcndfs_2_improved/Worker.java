@@ -85,7 +85,7 @@ public class Worker extends Thread{
                     }
                     catch(IllegalMonitorStateException e)
                     {
-                        System.err.println("monitorexception in thread: " + this.getId());
+                        System.out.println("monitorexception in thread: " + this.getId());
                     }
                     
                 } 
