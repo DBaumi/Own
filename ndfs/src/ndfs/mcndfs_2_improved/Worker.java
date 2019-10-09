@@ -54,6 +54,10 @@ public class Worker extends Thread{
         {
             throw new InterruptedException(); // stop looking if another thread found a solution
         }
+        if (thread_count.get(s)==null)
+        {
+                    thread_count.put(s,new AtomicInteger(0));
+        }
             colors.setPink(s,true);
             List<graph.State> post_states = graph.post(s); 
             Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
@@ -70,26 +74,20 @@ public class Worker extends Thread{
 
             if (s.isAccepting())
             {
-                if (thread_count.get(s)==null)
-                {
-                    thread_count.put(s,new AtomicInteger(0));
-                }
+                
                 thread_count.get(s).decrementAndGet();
-                synchronized (thread_count.get(s))
-                {
-                    if (thread_count.get(s).get()<=0)
-                    {
-                        thread_count.get(s).notifyAll();
-                        //System.out.println("Thread " +this.getId() + ": thread_count is 0");
-                    }
-                    else
-                    {
-                        //System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
-                        thread_count.get(s).wait();
-                    }
+                synchronized (thread_count.get(s)) {
+                if (thread_count.get(s).get() <= 0) {
+                    thread_count.get(s).notifyAll();
+                    // System.out.println("Thread " +this.getId() + ": thread_count is 0");
+                } 
+                else {
+                    // System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
+                    thread_count.get(s).wait();
                 }
+            }
                 //while (thread_count.get(s).get() > 0 ){} wait until value is 0 again before continuing
-
+                
             }
             red_states.put(s, true);
             colors.setPink(s,false);
@@ -103,6 +101,10 @@ public class Worker extends Thread{
         {
             throw new InterruptedException(); // stop looking if another thread found a solution
         }
+        if (thread_count.get(s)==null)
+        {
+             thread_count.put(s,new AtomicInteger(0));
+        }
             colors.color(s, Color.CYAN);
             List<graph.State> post_states = graph.post(s); 
             Collections.shuffle(post_states); // get next nodes and randomize for different thread paths
@@ -113,10 +115,6 @@ public class Worker extends Thread{
             }
             if (s.isAccepting()) 
             {
-                if (thread_count.get(s)==null)
-                {
-                    thread_count.put(s,new AtomicInteger(0));
-                }
                 thread_count.get(s).incrementAndGet();
                 dfsRed(s);
             } 
