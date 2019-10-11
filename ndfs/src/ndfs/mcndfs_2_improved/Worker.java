@@ -73,29 +73,30 @@ public class Worker extends Thread{
             }
 
             if (s.isAccepting())
-            {
-                
+            {  
                 thread_count.get(s).decrementAndGet();
-                synchronized (thread_count.get(s)) {
-                if (thread_count.get(s).get() <= 0) {
-                    try
+                synchronized (thread_count.get(s)) 
+                {
+                    if (thread_count.get(s).get() <= 0) 
                     {
-                        thread_count.get(s).notifyAll();
-                    // System.out.println("Thread " +this.getId() + ": thread_count is 0");
-                    }
-                    catch(IllegalMonitorStateException e)
+                        try
+                        {
+                            thread_count.get(s).notifyAll();
+                        // System.out.println("Thread " +this.getId() + ": thread_count is 0");
+                        }
+                        catch(IllegalMonitorStateException e)
+                        {
+                            System.out.println("monitorexception in thread: " + this.getId());
+                        }
+                        
+                    } 
+                    else 
                     {
-                        System.out.println("monitorexception in thread: " + this.getId());
+                        // System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
+                        thread_count.get(s).wait();
                     }
-                    
-                } 
-                else {
-                    // System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
-                    thread_count.get(s).wait();
                 }
-            }
-                //while (thread_count.get(s).get() > 0 ){} wait until value is 0 again before continuing
-                
+                //while (thread_count.get(s).get() > 0 ){} wait until value is 0 again before continuing  
             }
             red_states.put(s, true);
             colors.setPink(s,false);
