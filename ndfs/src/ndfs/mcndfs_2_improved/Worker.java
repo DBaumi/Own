@@ -81,8 +81,7 @@ public class Worker extends Thread{
                     {
                         try
                         {
-                            thread_count.get(s).notifyAll();
-                        // System.out.println("Thread " +this.getId() + ": thread_count is 0");
+                            thread_count.get(s).notifyAll();           
                         }
                         catch(IllegalMonitorStateException e)
                         {
@@ -92,11 +91,9 @@ public class Worker extends Thread{
                     } 
                     else 
                     {
-                        // System.out.println("Thread "+ this.getId()+ " is waiting on thread_count");
                         thread_count.get(s).wait();
                     }
                 }
-                //while (thread_count.get(s).get() > 0 ){} wait until value is 0 again before continuing  
             }
             red_states.put(s, true);
             colors.setPink(s,false);
