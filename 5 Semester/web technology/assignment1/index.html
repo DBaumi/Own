@@ -8,7 +8,7 @@
   Remarks: HTML5
 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <!-- declare meta data -->
     <meta charset="utf-8">
@@ -16,7 +16,10 @@
     <meta name="description" content="web shop for mobile devices">
 
     <!-- link stylesheet -->
-    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="css/screen.css">
+    <link rel="stylesheet" href="css/print.css">
+    <!-- importing a google font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
     <title>Assignment 1</title>
   </head>
@@ -31,46 +34,62 @@
 			<!--Introduction-->
 	   <section>
 	      <h1> Introduction </h1>
-        <h2>This is our first assignment. </h2>
+        <pre>
+      As a small introduction, here is a random generated pok&eacute;mon quote from <a href="https://codepen.io/wztan/pen/MaxbjE">codepen.io</a>:
+          "If the Pokemon I liked were there, I’d go anywhere. That’s what a real trainer does."  -   Cool Trainer Emma
+      Note, how pre keeps the space from the html code unlike text in the p tag!
+        </pre>
+        <h2> This is our first assignment. </h2>
 	       <p>
-	           It should hopefully come up as a basic mobile shop unless we mess it up.
+	           It should <strong>hopefully</strong> come up as a basic mobile shop unless we mess it up.
 	       </p>
+         <section>
+           <h3>Why shop on this platform?</h3>
+           <ol>
+             <li>Great design</li>
+             <li>A Pok&eacute;mon quote</li>
+             <li>You need more reasons?</li>
+           </ol>
+         </section>
       </section>
 
 			<!--Device List-->
       <section>
+        <h2> Device list </h2>
       	<ul>
       		<li> Apple </li>
-      			<ol>
+      			<ul>
       				<li> iPhone 10 </li>
       				<li> iPhone 11 </li>
-      			</ol>
+      			</ul>
       		<li> Samsung </li>
-      			<ol>
+      			<ul>
       				<li> S9 </li>
       				<li> S10+ </li>
-      			</ol>
+      			</ul>
       		<li> OnePlus </li>
-      			<ol>
+      			<ul>
       				<li> 7T </li>
       				<li> 7T Pro </li>
-      			</ol>
+      			</ul>
       	</ul>
       </section>
 
 			<!--Definitions-->
       <section>
+        <h2>Definitions</h2>
         <dl>
       		<dt> Screen Size </dt>
-      		<dd> size in inches </dd>
-      		<dt> Operating system </dt>
-      		<dd> User Interface </dd>
+      		<dd> <em>size in inches</em> </dd>
+      		<dt> <abbr title="Operating system">OS</abbr> </dt>
+      		<dd> <em>User Interface</em> </dd>
       	</dl>
       </section>
 
 		<!--Actual Products-->
   	<section>
-  	<h1> Table of Products </h1>
+      <h1>Products in our shop</h1>
+  	  <h2> Available products </h2>
   		<!--Table 1 (in stock)-->
   		<table>
   			<caption> List of devices in stock</caption>
@@ -87,7 +106,7 @@
           <td>
             <figure>
               <img width="100px" height="150px" src="https://www.91-img.com/pictures/136164-v2-oneplus-8-pro-mobile-phone-large-1.jpg">
-              <figcaption>Image 1 of 5</figcaption>
+              <figcaption>Image 1 of 6</figcaption>
             </figure>
           </td>
   				<td> 6.3 </td>
@@ -99,7 +118,7 @@
           <td>
             <figure>
               <img width="100px" height="150px" src="https://images-na.ssl-images-amazon.com/images/I/71yMgOenT5L._AC_SX679_.jpg">
-              <figcaption>Image 2 of 5</figcaption>
+              <figcaption>Image 2 of 6</figcaption>
             </figure>
           </td>
   				<td> 6.0 </td>
@@ -111,17 +130,29 @@
           <td>
             <figure>
               <img width="100px" height="150px" src="https://image.coolblue.nl/max/500x500/products/1221718">
-              <figcaption>Image 3 of 5</figcaption>
+              <figcaption>Image 3 of 6</figcaption>
             </figure>
           </td>
   				<td> 6.7 </td>
   				<td> Android Pie 9.0 </td>
+  			</tr>
+        <!-- this is the row for the form -->
+        <tr>
+  				<form action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
+            <td> <input type="text" name="brand" placeholder="brand" required> </td>
+            <td> <input type="text" name="model" placeholder="model" required> </td>
+            <td> <input type="file" name="image"> </td>
+            <td> <input type="number" name="screensize" placeholder="screensize"> </td>
+            <td> <input type="text" name="os" placeholder="operating system"> </td>
+            <td> <input type="submit" value="Submit device"> </td>
+          </form>
   			</tr>
   		</table>
   	</section>
 
 	   <!--Table 2 (out of stock)-->
   	<section>
+      <h2>Products out of stock</h2>
   			<table>
   				<caption> List of devices out of stock</caption>
   				<tr>
