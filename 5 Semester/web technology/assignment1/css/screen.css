@@ -1,0 +1,17 @@
+/* stylesheet for styling the web page and different screensizes for index.html */
+/* styling the main page */
+body {
+ /*define different font attributes here*/
+}
+
+td, th {
+  border: 1px solid black;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+/* media queries */
+/*mobile*/
+/*desktop*/

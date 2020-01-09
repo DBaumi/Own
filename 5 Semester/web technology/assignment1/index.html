@@ -16,7 +16,8 @@
     <meta name="description" content="web shop for mobile devices">
 
     <!-- link stylesheet -->
-    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="css/screen.css">
+    <link rel="stylesheet" href="css/print.css">
 
     <title>Assignment 1</title>
   </head>
@@ -31,9 +32,9 @@
 			<!--Introduction-->
 	   <section>
 	      <h1> Introduction </h1>
-        <h2>This is our first assignment. </h2>
+        <h2> This is our first assignment. </h2>
 	       <p>
-	           It should hopefully come up as a basic mobile shop unless we mess it up.
+	           It should <strong>hopefully</strong> come up as a basic mobile shop unless we mess it up.
 	       </p>
       </section>
 
@@ -62,9 +63,9 @@
       <section>
         <dl>
       		<dt> Screen Size </dt>
-      		<dd> size in inches </dd>
+      		<dd> <em>size in inches</em> </dd>
       		<dt> Operating system </dt>
-      		<dd> User Interface </dd>
+      		<dd> <em>User Interface</em> </dd>
       	</dl>
       </section>
 
@@ -87,7 +88,7 @@
           <td>
             <figure>
               <img width="100px" height="150px" src="https://www.91-img.com/pictures/136164-v2-oneplus-8-pro-mobile-phone-large-1.jpg">
-              <figcaption>Image 1 of 5</figcaption>
+              <figcaption>Image 1 of 6</figcaption>
             </figure>
           </td>
   				<td> 6.3 </td>
@@ -99,7 +100,7 @@
           <td>
             <figure>
               <img width="100px" height="150px" src="https://images-na.ssl-images-amazon.com/images/I/71yMgOenT5L._AC_SX679_.jpg">
-              <figcaption>Image 2 of 5</figcaption>
+              <figcaption>Image 2 of 6</figcaption>
             </figure>
           </td>
   				<td> 6.0 </td>
@@ -111,11 +112,22 @@
           <td>
             <figure>
               <img width="100px" height="150px" src="https://image.coolblue.nl/max/500x500/products/1221718">
-              <figcaption>Image 3 of 5</figcaption>
+              <figcaption>Image 3 of 6</figcaption>
             </figure>
           </td>
   				<td> 6.7 </td>
   				<td> Android Pie 9.0 </td>
+  			</tr>
+        <!-- this is the row for the form -->
+        <tr>
+  				<form action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
+            <td> <input type="text" name="brand" placeholder="brand" required> </td>
+            <td> <input type="text" name="model" placeholder="model" required> </td>
+            <td> <input type="file" name="image" placeholder="image"> </td>
+            <td> <input type="number" name="screensize" placeholder="screensize"> </td>
+            <td> <input type="text" name="os" placeholder="operating system"> </td>
+            <td> <input type="submit" value="Submit device"> </td>
+          </form>
   			</tr>
   		</table>
   	</section>
