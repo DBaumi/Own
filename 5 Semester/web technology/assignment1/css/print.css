@@ -1,1 +1,19 @@
 /* stylesheet for format the print of the webpage */
+@media print {
+  html{
+  margin: 1cm;
+	}
+  
+  nav {
+    display: none;
+  }
+
+  img {
+    height: 200px;
+    width: 140px;
+  }
+
+  tr {
+	  page-break-inside: avoid;
+  }
+}
