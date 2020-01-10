@@ -1,5 +1,14 @@
 /* stylesheet for styling the web page and different screensizes for index.html */
 /* styling the main page */
+
+/*TODO:
+   - background attributes and elements
+   - foreground color
+   - lists
+   - properties for paged media
+   - other
+*/
+
 body {
   font-family: 'Lato', sans-serif;
   margin-left: 15px;
@@ -12,17 +21,69 @@ nav {
   padding: 5px 0px;
   background-color: #dddddd;
   font-size: 16px;
+  width: 100%;
 }
 
-#navlink {
-  text-decoration: none;
+footer {
+  background-color: #dddddd;
+  margin: 1% 0 0 0;
+  width: 100%;
+  height: auto;
+  padding: 5px 5px;
+  background-color: #dddddd;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 22px;
+  border-bottom: solid 1px black;
+}
+
+h2 {
+  font-variant: small-caps;
+  font-size: 18px;
+}
+
+footer p {
+  margin: 0 !important;
+}
+
+.footerLeft{
+  text-align: left;
+  margin-left: 0;
+  float: left;
+}
+
+.footerRight {
+  text-align: right;
+  float: none;
+}
+
+#navlink:link {
+  font-size: 18px;
   color: black;
-  text-transform: capitalize;
-  margin: 0 15px 0 15px;
+  text-transform: uppercase;
+  /*margin: 0 9% 0 9%; -> short notation: */
+  margin-top: 0%;
+  margin-right: 9%;
+  margin-bottom: 0%;
+  margin-left: 9%;
 }
 
 #navlink:hover {
-  font-size: 20px;
+  font-weight: bold;
+}
+
+#navlink:visited {
+  color: blue;
+}
+
+#navlink:active {
+  color: red;
+}
+
+#navlink:focus {
+  text-decoration: none;
 }
 
 .tableInStock{
@@ -52,8 +113,10 @@ tr:nth-child(odd) {
   width: 140px;
 }
 
-.textIndent {
+.cite {
   text-indent: 2%;
+  font-size: 80%;
+  font-style: italic;
 }
 
 .formRowInTable td {
