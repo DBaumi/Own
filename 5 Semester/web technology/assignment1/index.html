@@ -84,6 +84,7 @@
       <h1>Products in our shop</h1>
   	  <h2> Available products </h2>
   		<!--Table 1 (in stock)-->
+<<<<<<< HEAD
   		<form class="newElement" action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
 		    <table class="tableInStock">
   			  <caption> List of devices in stock</caption>
@@ -132,11 +133,63 @@
   			  </tr>
           <!-- this is the row for the form -->
           <tr>
+=======
+  		<form action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
+		<table>
+  			<caption> List of devices in stock</caption>
+  			<tr>
+  			     <th> Brand </th>
+             <th> Model </th>
+             <th> Image </th>
+             <th> Screen Size </th>
+             <th> Operating System </th>
+  			</tr>
+  			<tr>
+  				<td> OnePlus </td>
+  				<td> 7T </td>
+          <td>
+            <figure>
+              <img src="https://www.91-img.com/pictures/136164-v2-oneplus-8-pro-mobile-phone-large-1.jpg">
+              <figcaption>Image 1 of 6</figcaption>
+            </figure>
+          </td>
+  				<td> 6.3 </td>
+  				<td> Android 10</td>
+  			</tr>
+  			<tr>
+  				<td> Apple </td>
+  				<td> iPhone 10 </td>
+          <td>
+            <figure>
+              <img src="https://images-na.ssl-images-amazon.com/images/I/71yMgOenT5L._AC_SX679_.jpg">
+              <figcaption>Image 2 of 6</figcaption>
+            </figure>
+          </td>
+  				<td> 6.0 </td>
+  				<td> iOS </td>
+  			</tr>
+  			<tr>
+  				<td> Samsung </td>
+  				<td> S10+ </td>
+          <td>
+            <figure>
+              <img src="https://image.coolblue.nl/max/500x500/products/1221718">
+              <figcaption>Image 3 of 6</figcaption>
+            </figure>
+          </td>
+  				<td> 6.7 </td>
+  				<td> Android Pie 9.0 </td>
+  			</tr>
+        <!-- this is the row for the form -->
+        <tr id="form">
+  				
+>>>>>>> assignment1-alvin
             <td> <input type="text" name="brand" placeholder="brand" required> </td>
             <td> <input type="text" name="model" placeholder="model" required> </td>
             <td> <input type="file" name="image"> </td>
             <td> <input type="number" name="screensize" placeholder="screensize"> </td>
             <td> <input type="text" name="os" placeholder="operating system"> </td>
+<<<<<<< HEAD
   			  </tr>
 			    <tr class="formRowInTable">
 			      <td></td>
@@ -149,6 +202,19 @@
 			    </tr>
   		  </table>
       </form>
+=======
+            
+  		</tr>
+		<tr id="form"> 
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td> <input type="submit" value="Submit device"> </td>
+		</tr>
+  		</table>
+		</form>
+>>>>>>> assignment1-alvin
   	</section>
 
 	   <!--Table 2 (out of stock)-->

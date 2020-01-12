@@ -1,5 +1,12 @@
 /* stylesheet for format the print of the webpage */
 @media print {
+<<<<<<< HEAD
+=======
+  html{
+  margin: 1cm;
+	}
+  
+>>>>>>> assignment1-alvin
   nav {
     display: none;
   }
@@ -9,5 +16,30 @@
     width: 140px;
   }
 
+<<<<<<< HEAD
 
 }
+=======
+  tr {
+	  page-break-inside: avoid;
+  }
+  td {
+	  column-width: 150px;
+	  column-height: 210px;
+	  font-size: 20px;
+  }
+  form {
+	  display: none;
+  }
+  h1 {
+	  font-size: 40px;
+	  font-weight: bold;
+	  font-family: monospace;
+  }
+  h2 {
+	  font-size: 30px;
+	  font-weight: normal;
+	  font-family: serif;
+  }
+}
+>>>>>>> assignment1-alvin
