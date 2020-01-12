@@ -1,1 +1,52 @@
 /* stylesheet for format the print of the webpage */
+@media print {
+  html{
+  margin: 1cm;
+	}
+
+  nav, footer {
+    display: none;
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
+  img {
+    height: 200px;
+    width: 140px;
+  }
+
+  .orphansText {
+    orphans: 10;
+  }
+
+  .widowsText {
+    widows: 5;
+  }
+
+  .sectionProductsInStock{
+    page-break-before: always;
+    page-break-after: always;
+  }
+
+  tr {
+	  page-break-inside: avoid;
+  }
+  td {
+	  font-size: 20px;
+  }
+  .formInputFields, .formRowInTable {
+	  display: none;
+  }
+  h1 {
+	  font-size: 40px;
+	  font-weight: bold;
+  }
+  h2 {
+	  font-size: 30px;
+	  font-weight: normal;
+  }
+
+}

@@ -1,0 +1,227 @@
+/* stylesheet for styling the web page and different screensizes for index.html */
+
+/* desktop view */
+body {
+    font-family: 'Lato', sans-serif;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+nav {
+    text-align: center;
+    height: auto;
+    padding: 5px 0px;
+    background-color: #dddddd;
+    background-image: url(https://q-mobilitysolutions.nl/wp-content/uploads/2015/04/Q-MobilitySolutions-black-gradient-background.png);
+    background-repeat: repeat-x;
+    font-size: 16px;
+    width: 100%;
+}
+
+footer {
+    background: #dddddd url(https://q-mobilitysolutions.nl/wp-content/uploads/2015/04/Q-MobilitySolutions-black-gradient-background.png) repeat-x center;
+    color: white;
+    margin: 1% 0 0 0;
+    width: 100%;
+    height: auto;
+    padding: 5px 5px;
+    background-color: #dddddd;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 22px;
+    border-bottom: solid 1px black;
+}
+
+h2 {
+    font-variant: small-caps;
+    font-size: 18px;
+}
+
+footer p {
+    margin: 0 !important;
+}
+
+.footerText {
+    text-align: center;
+    float: none;
+}
+
+.formInputFields {
+    vertical-align: middle;
+}
+
+#navlink:link {
+    font-size: 18px;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    /*margin: 0 9% 0 9%; -> short notation: */
+    margin-top: 0%;
+    margin-right: 9%;
+    margin-bottom: 0%;
+    margin-left: 9%;
+}
+
+#navlink:hover {
+    font-weight: bold;
+}
+
+#navlink:visited {
+    color: blue;
+}
+
+#navlink:active {
+    color: red;
+}
+
+#navlink:focus {
+    text-decoration: underline;
+}
+
+.tableInStock{
+    border-color: black;
+    border-style: solid;
+    border-spacing: 2px;
+    border-width: 1px;
+}
+
+table {
+    width: 50%;
+    margin: 0 25%;
+    caption-side: bottom;
+}
+
+.tableOutOfStock {
+    vertical-align: text-bottom;
+}
+
+.fillerContainer{
+    height: 70%;
+    background-color: black;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: center;
+    width: 20%;
+}
+
+/* every odd child element from tr will get a different color */
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+
+.tableInStock img, .tableOutOfStock img {
+    height: 200px;
+    width: 140px;
+}
+
+.cite {
+    text-indent: 2%;
+    font-size: 80%;
+    font-style: italic;
+}
+
+.formRowInTable td {
+    border-style: none;
+}
+
+.formRowInTable input {
+    width: 100%;
+}
+
+.newElement input {
+    width: 96%;
+    margin: 0 2%;
+    text-align: center;
+    border-style: none;
+}
+
+ul {
+    list-style-type: lower-greek;
+    list-style-position: inside;
+    list-style-image: none;
+}
+
+ol {
+    list-style: lower-latin inside none;
+}
+
+
+/* mobile portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+and (orientation: portrait) {
+
+  #navlink:link {
+    margin: 0 5%;
+    vertical-align: middle;
+    font-size: 35px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 25px;
+  }
+
+  pre {
+    display: none;
+  }
+
+  body {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    margin: 0;
+  }
+
+  section {
+    margin: 10% 0;
+  }
+
+  /* remove filler text, because it is not needed in mobile/tablet view (it was just for print view) */
+  .fillerText{
+    display: none;
+  }
+
+  .footerText {
+    font-size: 15px !important;
+  }
+
+
+
+/* mobile landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+and (orientation: landscape) {
+
+  #navlink:link {
+    margin: 0 5%;
+    vertical-align: middle;
+    font-size: 25px;
+  }
+
+  section {
+    margin: 5% 0;
+  }
+
+  table {
+    width: 100%;
+    margin: 0;
+  }
+
+  footer p {
+    font-size: 18px !important;
+  }
+
+  .footerText {
+    font-size: 15px !important;
+  }
+
+}
