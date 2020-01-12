@@ -16,7 +16,7 @@
     <meta name="description" content="web shop for mobile devices">
 
     <!-- link stylesheet -->
-    <link rel="stylesheet" href="css/screen.css">
+    <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/print.css">
     <!-- importing a google font -->
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
@@ -26,9 +26,9 @@
   <body>
 		<!--Navigation-->
 	   <nav>
-	      <a href="index.html" id="navlink"> Home </a> |
-        <a href="#" id="navlink"> Shipping </a> |
-        <a href="#" id="navlink"> About </a> |
+	      <a href="index.html" id="navlink"> Home </a>
+        <a href="#" id="navlink"> Shipping </a>
+        <a href="#" id="navlink"> About </a>
         <a href="https://www.mobileshop.eu/nl/" target="_blank" id="navlink"> Partner </a>
 	   </nav>
 			<!--Introduction-->
@@ -80,11 +80,10 @@
       </section>
 
 		<!--Actual Products-->
-  	<section>
+  	<section class="sectionProductsInStock">
       <h1>Products in our shop</h1>
   	  <h2> Available products </h2>
   		<!--Table 1 (in stock)-->
-<<<<<<< HEAD
   		<form class="newElement" action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
 		    <table class="tableInStock">
   			  <caption> List of devices in stock</caption>
@@ -132,64 +131,12 @@
   				  <td> Android Pie 9.0 </td>
   			  </tr>
           <!-- this is the row for the form -->
-          <tr>
-=======
-  		<form action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
-		<table>
-  			<caption> List of devices in stock</caption>
-  			<tr>
-  			     <th> Brand </th>
-             <th> Model </th>
-             <th> Image </th>
-             <th> Screen Size </th>
-             <th> Operating System </th>
-  			</tr>
-  			<tr>
-  				<td> OnePlus </td>
-  				<td> 7T </td>
-          <td>
-            <figure>
-              <img src="https://www.91-img.com/pictures/136164-v2-oneplus-8-pro-mobile-phone-large-1.jpg">
-              <figcaption>Image 1 of 6</figcaption>
-            </figure>
-          </td>
-  				<td> 6.3 </td>
-  				<td> Android 10</td>
-  			</tr>
-  			<tr>
-  				<td> Apple </td>
-  				<td> iPhone 10 </td>
-          <td>
-            <figure>
-              <img src="https://images-na.ssl-images-amazon.com/images/I/71yMgOenT5L._AC_SX679_.jpg">
-              <figcaption>Image 2 of 6</figcaption>
-            </figure>
-          </td>
-  				<td> 6.0 </td>
-  				<td> iOS </td>
-  			</tr>
-  			<tr>
-  				<td> Samsung </td>
-  				<td> S10+ </td>
-          <td>
-            <figure>
-              <img src="https://image.coolblue.nl/max/500x500/products/1221718">
-              <figcaption>Image 3 of 6</figcaption>
-            </figure>
-          </td>
-  				<td> 6.7 </td>
-  				<td> Android Pie 9.0 </td>
-  			</tr>
-        <!-- this is the row for the form -->
-        <tr id="form">
-  				
->>>>>>> assignment1-alvin
+          <tr class="formInputFields">
             <td> <input type="text" name="brand" placeholder="brand" required> </td>
             <td> <input type="text" name="model" placeholder="model" required> </td>
             <td> <input type="file" name="image"> </td>
             <td> <input type="number" name="screensize" placeholder="screensize"> </td>
             <td> <input type="text" name="os" placeholder="operating system"> </td>
-<<<<<<< HEAD
   			  </tr>
 			    <tr class="formRowInTable">
 			      <td></td>
@@ -202,19 +149,6 @@
 			    </tr>
   		  </table>
       </form>
-=======
-            
-  		</tr>
-		<tr id="form"> 
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td> <input type="submit" value="Submit device"> </td>
-		</tr>
-  		</table>
-		</form>
->>>>>>> assignment1-alvin
   	</section>
 
 	   <!--Table 2 (out of stock)-->
@@ -267,10 +201,43 @@
   				</tr>
   			</table>
   		</section>
+      <section class="fillerText">
+        <h1>Random filler text to show the print layout with orphans and widows </h1>
+        <p class="orphansText">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit amet mattis. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nec feugiat nisl pretium fusce id velit ut tortor. Integer feugiat scelerisque varius morbi enim nunc faucibus. Velit egestas dui id ornare. Faucibus et molestie ac feugiat sed lectus. Ipsum a arcu cursus vitae congue mauris. Metus vulputate eu scelerisque felis. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Lectus nulla at volutpat diam ut venenatis tellus in metus.
+          Pharetra magna ac placerat vestibulum lectus mauris ultrices. Phasellus egestas tellus rutrum tellus pellentesque eu. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Mauris rhoncus aenean vel elit scelerisque. Dictumst quisque sagittis purus sit amet volutpat consequat mauris. Nunc congue nisi vitae suscipit tellus mauris a. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Et tortor consequat id porta nibh venenatis cras sed felis. Nulla facilisi morbi tempus iaculis urna id volutpat. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Amet purus gravida quis blandit turpis. Sed viverra tellus in hac. A diam sollicitudin tempor id.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit amet mattis. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nec feugiat nisl pretium fusce id velit ut tortor. Integer feugiat scelerisque varius morbi enim nunc faucibus. Velit egestas dui id ornare. Faucibus et molestie ac feugiat sed lectus. Ipsum a arcu cursus vitae congue mauris. Metus vulputate eu scelerisque felis. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Lectus nulla at volutpat diam ut venenatis tellus in metus.
+          Pharetra magna ac placerat vestibulum lectus mauris ultrices. Phasellus egestas tellus rutrum tellus pellentesque eu. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Mauris rhoncus aenean vel elit scelerisque. Dictumst quisque sagittis purus sit amet volutpat consequat mauris. Nunc congue nisi vitae suscipit tellus mauris a. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Et tortor consequat id porta nibh venenatis cras sed felis. Nulla facilisi morbi tempus iaculis urna id volutpat. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Amet purus gravida quis blandit turpis. Sed viverra tellus in hac. A diam sollicitudin tempor id.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit amet mattis. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nec feugiat nisl pretium fusce id velit ut tortor. Integer feugiat scelerisque varius morbi enim nunc faucibus. Velit egestas dui id ornare. Faucibus et molestie ac feugiat sed lectus. Ipsum a arcu cursus vitae congue mauris. Metus vulputate eu scelerisque felis. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Lectus nulla at volutpat diam ut venenatis tellus in metus.
+          Pharetra magna ac placerat vestibulum lectus mauris ultrices. Phasellus egestas tellus rutrum tellus pellentesque eu. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Mauris rhoncus aenean vel elit scelerisque. Dictumst quisque sagittis purus sit amet volutpat consequat mauris. Nunc congue nisi vitae suscipit tellus mauris a. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Et tortor consequat id porta nibh venenatis cras sed felis. Nulla facilisi morbi tempus iaculis urna id volutpat. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Amet purus gravida quis blandit turpis. Sed viverra tellus in hac. A diam sollicitudin tempor id.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit amet mattis. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nec feugiat nisl pretium fusce id velit ut tortor. Integer feugiat scelerisque varius morbi enim nunc faucibus. Velit egestas dui id ornare. Faucibus et molestie ac feugiat sed lectus. Ipsum a arcu cursus vitae congue mauris. Metus vulputate eu scelerisque felis. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Lectus nulla at volutpat diam ut venenatis tellus in metus.
+          Pharetra magna ac placerat vestibulum lectus mauris ultrices. Phasellus egestas tellus rutrum tellus pellentesque eu. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Mauris rhoncus aenean vel elit scelerisque. Dictumst quisque sagittis purus sit amet volutpat consequat mauris. Nunc congue nisi vitae suscipit tellus mauris a. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Et tortor consequat id porta nibh venenatis cras sed felis. Nulla facilisi morbi tempus iaculis urna id volutpat. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Amet purus gravida quis blandit turpis. Sed viverra tellus in hac. A diam sollicitudin tempor id.
+        </p>
+        <p class="widowsText">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada proin libero nunc consequat interdum varius sit amet mattis. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Nec feugiat nisl pretium fusce id velit ut tortor. Integer feugiat scelerisque varius morbi enim nunc faucibus. Velit egestas dui id ornare. Faucibus et molestie ac feugiat sed lectus. Ipsum a arcu cursus vitae congue mauris. Metus vulputate eu scelerisque felis. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Lectus nulla at volutpat diam ut venenatis tellus in metus.
+          Pharetra magna ac placerat vestibulum lectus mauris ultrices. Phasellus egestas tellus rutrum tellus pellentesque eu. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Mauris rhoncus aenean vel elit scelerisque. Dictumst quisque sagittis purus sit amet volutpat consequat mauris. Nunc congue nisi vitae suscipit tellus mauris a. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Et tortor consequat id porta nibh venenatis cras sed felis. Nulla facilisi morbi tempus iaculis urna id volutpat. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Amet purus gravida quis blandit turpis. Sed viverra tellus in hac. A diam sollicitudin tempor id.
+
+        </p>
+      </section>
+      <section>
+        <h1>Compatibility report</h1>
+        <p>
+          Print: <br>
+          The most accurate showing of the print media query has Google Chrome. However, the other browser we tested (Edge, Internet Explorer 11 and Mozilla Firefox)
+          are having problems with the css attributes 'orphans' and 'widows'.
+        </p>
+        <p>
+          Screen: <br>
+          The normal rendering for sizes above the threshold of 320x480 (portrait and landscape) were accurate on all browers we tested. When testing if the browers
+          can render the correct css for the mobile/tablet view, Edge and Internet Explorer both could not do that in any way. The Mozilla Firefox could render the css
+          but struggeled with the tables and the navigation (nav tag). The only brower to properly work on all html elements was, again, Google Chrome.
+        </p>
+      </section>
 
       <footer>
-        <p class="footerLeft">Mobile Shop - Assignment 1</p>
-        <p class="footerRight">&copy; David Baumgartner, Alvin Milaqi</p>
+        <p class="footerText">David Baumgartner, Alvin Milaqi</p>
       </footer>
   </body>
 </html>
