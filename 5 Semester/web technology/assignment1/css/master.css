@@ -97,10 +97,6 @@ table {
     vertical-align: text-bottom;
 }
 
-.fillerContainer{
-    height: 70%;
-    background-color: black;
-}
 
 td, th {
     border: 1px solid black;

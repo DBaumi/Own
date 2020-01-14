@@ -93,6 +93,10 @@ table {
     caption-side: bottom;
 }
 
+.sortable {
+  cursor: pointer;
+}
+
 .tableOutOfStock {
     vertical-align: text-bottom;
 }
