@@ -87,7 +87,7 @@ footer p {
     border-width: 1px;
 }
 
-table {
+table, tbody {
     width: 50%;
     margin: 0 25%;
     caption-side: bottom;
@@ -110,6 +110,7 @@ td, th {
     border: 1px solid black;
     text-align: center;
     width: 20%;
+    vertical-align: middle;
 }
 
 /* every odd child element from tr will get a different color */
@@ -181,7 +182,7 @@ and (orientation: portrait) {
     text-align: center;
   }
 
-  table {
+  table, tbody {
     width: 100%;
     margin: 0;
   }
@@ -215,7 +216,7 @@ and (orientation: landscape) {
     margin: 5% 0;
   }
 
-  table {
+  table, tbody {
     width: 100%;
     margin: 0;
   }

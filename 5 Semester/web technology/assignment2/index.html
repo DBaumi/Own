@@ -94,7 +94,6 @@
     <!--Table 1 (in stock)-->
     <form class="newElement" action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
       <table class="tableInStock" id="firstTable">
-
         <caption> List of devices in stock</caption>
         <tr>
           <th class="sortable" onclick="sortTable(0, 1)"> Brand </th>
@@ -151,9 +150,11 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
           <td>
-            <input type="submit" value="Submit device">
+            <button class="sortable" type="reset" name="reset" onclick="resetDatabase()">Reset</button>
+          </td>
+          <td>
+            <input class="sortable" type="submit" value="Submit device">
           </td>
         </tr>
       </table>
@@ -163,15 +164,22 @@
   <!--Table 2 (out of stock)-->
   <section>
     <h2>Products out of stock</h2>
-    <table class="tableOutOfStock" id="secondTable">
+    <table class="tableOutOfStock" id="secondTable" onclick="dynamicTableFillUp()">
       <caption> List of devices out of stock</caption>
-      <tr>
-        <th class="sortable" onclick="sortTable(0, 2)"> Brand </th>
-        <th class="sortable" onclick="sortTable(1, 2)"> Model </th>
-        <th> Image </th>
-        <th class="sortable" onclick="sortTable(3, 2)"> Screen Size </th>
-        <th class="sortable" onclick="sortTable(4, 2)"> Operating System </th>
-      </tr>
+      <thead>
+        <tr>
+          <th class="sortable" onclick="sortTable(0, 2)"> Brand </th>
+          <th class="sortable" onclick="sortTable(1, 2)"> Model </th>
+          <th> Image </th>
+          <th class="sortable" onclick="sortTable(3, 2)"> Screen Size </th>
+          <th class="sortable" onclick="sortTable(4, 2)"> Operating System </th>
+        </tr>
+      </thead>
+      <tbody id="contentToFillDynamically" class="tableOutOfStock">
+
+      </tbody>
+
+      <!--
       <tr>
         <td> OnePlus </td>
         <td> 7T Pro </td>
@@ -207,10 +215,10 @@
         </td>
         <td> 6.1 </td>
         <td> Android Pie 9.0 </td>
-      </tr>
+      </tr> -->
     </table>
   </section>
-  
+
   <footer>
     <p class="footerText">David Baumgartner, Alvin Milaqi</p>
   </footer>

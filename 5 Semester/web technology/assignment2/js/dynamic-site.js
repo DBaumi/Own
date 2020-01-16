@@ -1,5 +1,7 @@
 /* this is the javascript code for a dynamic web page */
-// TODO: function sortTable so, that input fields are not considered to be sorted
+/* TODO:
+  --load table without clicking
+  --exercise 4
 
 /*
   Function for sorting tables by clicking their table headers.
@@ -59,5 +61,47 @@ function sortTable(columnToSort, tableNumber){
 
     }*/
   }
+}
 
+function resetDatabase(){
+  // create new http request
+  var xhr = new XMLHttpRequest();
+
+  // catch the response of the server with event listener
+  xhr.addEventListener("load", function(){
+    if(this.status == 200){
+      // console.log("Server response: " + this.responseText);
+      window.alert("Database reset successfully!");
+    }
+  });
+
+  // open the connection and send to the server
+  xhr.open("GET", "https://wt.ops.labs.vu.nl/api20/5448bd47/reset", true);
+  xhr.send();
+}
+
+function dynamicTableFillUp(){
+  var xhr = new XMLHttpRequest();
+  xhr.responseType = "json";
+
+  xhr.addEventListener("load", function(){
+    var tableToFill = document.getElementById("contentToFillDynamically");
+    if(this.status = 200){
+      var responseServer = this.response;
+      var i;
+      for(i = 0; i < responseServer.length; i++){
+        tableToFill.innerHTML +=
+        "<tr>" +
+          "<td>" + responseServer[i].brand + "</td>" +
+          "<td>" + responseServer[i].model + "</td>" +
+          "<td>" + "<img src=" + responseServer[i].image + ">" + "</td>" +
+          "<td>" + responseServer[i].screensize + "</td>" +
+          "<td>" + responseServer[i].os + "</td>" +
+        "</tr>";
+      }
+    }
+  });
+
+  xhr.open("GET", "https://wt.ops.labs.vu.nl/api20/5448bd47", true);
+  xhr.send();
 }
