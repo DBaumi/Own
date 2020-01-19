@@ -87,10 +87,14 @@ footer p {
     border-width: 1px;
 }
 
-table, tbody {
+table {
     width: 50%;
     margin: 0 25%;
     caption-side: bottom;
+}
+
+tbody, thead {
+  width: 100%;
 }
 
 .sortable {

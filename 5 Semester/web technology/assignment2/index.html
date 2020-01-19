@@ -92,7 +92,7 @@
     <h1>Products in our shop</h1>
     <h2> Available products </h2>
     <!--Table 1 (in stock)-->
-    <form class="newElement" action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
+    <form id="newProductForm" method="" action="">
       <table class="tableInStock" id="firstTable">
         <caption> List of devices in stock</caption>
         <tr>
@@ -140,21 +140,21 @@
         </tr>
         <!-- this is the row for the form -->
         <tr class="formInputFields">
-          <td> <input type="text" name="brand" placeholder="brand" required> </td>
-          <td> <input type="text" name="model" placeholder="model" required> </td>
-          <td> <input type="file" name="image"> </td>
-          <td> <input type="number" name="screensize" placeholder="screensize"> </td>
-          <td> <input type="text" name="os" placeholder="operating system"> </td>
+          <td> <input id="deviceBrand" type="text" name="brand" placeholder="brand" required> </td>
+          <td> <input id="deviceModel" type="text" name="model" placeholder="model" required> </td>
+          <td> <input id="deviceImg" type="file" name="image"> </td>
+          <td> <input id="deviceScreensize" type="number" name="screensize" placeholder="screensize"> </td>
+          <td> <input id="deviceOS" type="text" name="os" placeholder="operating system"> </td>
         </tr>
         <tr class="formRowInTable">
           <td></td>
           <td></td>
           <td></td>
           <td>
-            <button class="sortable" type="reset" name="reset" onclick="resetDatabase()">Reset</button>
+            <button class="sortable" type="reset" name="reset" onclick="resetAndRefillTable()">Reset</button>
           </td>
           <td>
-            <input class="sortable" type="submit" value="Submit device">
+            <input id="submitDevice" class="sortable" type="submit" value="Submit device" onclick="sendFormData()">
           </td>
         </tr>
       </table>
@@ -164,7 +164,7 @@
   <!--Table 2 (out of stock)-->
   <section>
     <h2>Products out of stock</h2>
-    <table class="tableOutOfStock" id="secondTable" onclick="dynamicTableFillUp()">
+    <table class="tableOutOfStock" id="secondTable">
       <caption> List of devices out of stock</caption>
       <thead>
         <tr>
@@ -175,8 +175,8 @@
           <th class="sortable" onclick="sortTable(4, 2)"> Operating System </th>
         </tr>
       </thead>
-      <tbody id="contentToFillDynamically" class="tableOutOfStock">
-
+      <tbody id="contentToFillDynamically">
+        <script> dynamicTableFillUp(); </script>
       </tbody>
 
       <!--

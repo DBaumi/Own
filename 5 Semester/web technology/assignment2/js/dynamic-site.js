@@ -1,6 +1,5 @@
 /* this is the javascript code for a dynamic web page */
 /* TODO:
-  --load table without clicking
   --exercise 4
 
 /*
@@ -56,13 +55,20 @@ function sortTable(columnToSort, tableNumber){
       rows[i].parentNode.insertBefore(rows[j], rows[i]);
       rowSwitching = true;
     }
-    /* if no swap is needed, then the sorting direction can be changed
-    else {
-
-    }*/
   }
 }
 
+/*
+  Function for loading the table again after the resetDatabase() got executed.
+*/
+function resetAndRefillTable(){
+  resetDatabase();
+  dynamicTableFillUp();
+}
+
+/*
+  Function for reseting the database with an AJAX GET http request.
+*/
 function resetDatabase(){
   // create new http request
   var xhr = new XMLHttpRequest();
@@ -80,12 +86,22 @@ function resetDatabase(){
   xhr.send();
 }
 
+/*
+  Function for dynamically filling up the second table on the web page.
+  NOTE: clear innerHTML of tbody first and the fill it with the content from the web server
+*/
 function dynamicTableFillUp(){
   var xhr = new XMLHttpRequest();
   xhr.responseType = "json";
 
+  // add an event listener with "load" and an anonymous function
   xhr.addEventListener("load", function(){
     var tableToFill = document.getElementById("contentToFillDynamically");
+
+    // clear table first
+    tableToFill.innerHTML = "";
+
+    // check if the http request was successfull
     if(this.status = 200){
       var responseServer = this.response;
       var i;
@@ -104,4 +120,22 @@ function dynamicTableFillUp(){
 
   xhr.open("GET", "https://wt.ops.labs.vu.nl/api20/5448bd47", true);
   xhr.send();
+}
+
+/**/
+function sendFormData(){
+    var xhr = new XMLHttpRequest();
+
+    // get data from the form
+    var id = null;
+    var brand = document.getElementById("deviceBrand").value;
+    var model = document.getElementById("deviceModel").value;
+    var image = document.getElementById("deviceImg").value;
+    var screensize = document.getElementById("deviceScreensize").value;
+    var os = document.getElementById("deviceOS").value;
+
+    // parse to JSON
+    var data = {"id": id,"brand": brand, "model": model, "image": image, "screensize": screensize, "os": os};
+    xhr.open("POST", "https://wt.ops.labs.vu.nl/api20/5448bd47", true);
+  xhr.send(data);
 }
