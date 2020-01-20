@@ -125,7 +125,6 @@ function dynamicTableFillUp(){
 /**/
 function sendFormData(){
     var xhr = new XMLHttpRequest();
-
     // get data from the form
     var id = null;
     var brand = document.getElementById("deviceBrand").value;
@@ -135,7 +134,15 @@ function sendFormData(){
     var os = document.getElementById("deviceOS").value;
 
     // parse to JSON
-    var data = {"id": id,"brand": brand, "model": model, "image": image, "screensize": screensize, "os": os};
-    xhr.open("POST", "https://wt.ops.labs.vu.nl/api20/5448bd47", true);
-  xhr.send(data);
+    var data = JSON.stringify({"id": id, "brand": brand, "model": model, "os": os, "image": image, "screensize": screensize});
+    /*var url = "https://wt.ops.labs.vu.nl/api20/5448bd47"
+      + "?" + "brand=" + brand
+      + "&" + "model=" + model
+      + "&" + "image=" + image
+      + "&" + "screensize=" + screensize
+      + "&" + "os" + os;*/
+    var url = "https://wt.ops.labs.vu.nl/api20/5448bd47";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(data);
 }
