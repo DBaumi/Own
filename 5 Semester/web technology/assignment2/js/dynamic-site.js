@@ -122,27 +122,39 @@ function dynamicTableFillUp(){
   xhr.send();
 }
 
-/**/
+/*
+  Function to send the form data with ajax post http request to the server.
+  @ NOTE: function is not working properly:
+    - elements from the form have the correct values
+    - we think the error is, that we have a 'bad request' error (error 400) and we could not fix it
+    - maybe the 'bad request error' is caused by the wrong url, the wrong JSON parse of the data or the wrong setRequestHeader
+*/
 function sendFormData(){
-    var xhr = new XMLHttpRequest();
-    // get data from the form
-    var id = null;
-    var brand = document.getElementById("deviceBrand").value;
-    var model = document.getElementById("deviceModel").value;
-    var image = document.getElementById("deviceImg").value;
-    var screensize = document.getElementById("deviceScreensize").value;
-    var os = document.getElementById("deviceOS").value;
+  // define request
+  var xhr = new XMLHttpRequest();
+  var url = "https://wt.ops.labs.vu.nl/api20/5448bd47";
+  xhr.open("POST", url, true);
 
-    // parse to JSON
-    var data = JSON.stringify({"id": id, "brand": brand, "model": model, "os": os, "image": image, "screensize": screensize});
-    /*var url = "https://wt.ops.labs.vu.nl/api20/5448bd47"
-      + "?" + "brand=" + brand
-      + "&" + "model=" + model
-      + "&" + "image=" + image
-      + "&" + "screensize=" + screensize
-      + "&" + "os" + os;*/
-    var url = "https://wt.ops.labs.vu.nl/api20/5448bd47";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send(data);
+  // define header
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  // check if the request is compete and was successful
+  xhr.onreadystatechange = function() {
+    if(this.readyState === 4 && this.status === 200) {
+      window.alret(this.responseText);
+    }
+  };
+
+  // get data from the form
+  var brand = document.getElementById("deviceBrand").value;
+  var model = document.getElementById("deviceModel").value;
+  var image = document.getElementById("deviceImg").value;
+  var screensize = document.getElementById("deviceScreensize").value;
+  var os = document.getElementById("deviceOS").value;
+
+  // parse to JSON
+  var data = JSON.stringify({"brand": brand, "model": model, "os": os, "image": image, "screensize": screensize});
+
+  // send data
+  xhr.send(data);
 }

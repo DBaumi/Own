@@ -92,7 +92,12 @@
     <h1>Products in our shop</h1>
     <h2> Available products </h2>
     <!--Table 1 (in stock)-->
-    <form id="newProductForm" method="" action="">
+    <!--
+    Unfortunately, we were not able to finish exercise 4 because we could not find the error.
+    However, for testing the reset button, please use the form tag in line 98 instead of the form tag in line 100.
+    <form action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
+    -->
+    <form class="newElement" method="" action="">
       <table class="tableInStock" id="firstTable">
         <caption> List of devices in stock</caption>
         <tr>
@@ -154,7 +159,7 @@
             <button class="sortable" type="reset" name="reset" onclick="resetAndRefillTable()">Reset</button>
           </td>
           <td>
-            <input id="submitDevice" class="sortable" type="submit" value="Submit device" onclick="sendFormData()">
+            <input class="sortable" type="submit" value="Submit device" onclick="sendFormData()">
           </td>
         </tr>
       </table>
