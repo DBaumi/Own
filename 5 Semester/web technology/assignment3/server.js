@@ -40,11 +40,15 @@ app.use(express.json());
 
 // Route for getting the list of devices
 app.get('/devices', function(req, res){
-  db.all(`SELECT * FROM phones`, [], (err, rows) => {
+  // sql statement
+  const sql = `SELECT * FROM phones`;
+  db.all(sql, [], (err, rows) => {
     if (err) {
       throw err;
     }
-    return res.json(rows)
+    // send response for the request
+    rows ? res.json(rows) : res.status(404).send('Devices could not be found!')
+
   });
 });
 
@@ -52,6 +56,7 @@ app.get('/devices', function(req, res){
 app.get('/devices/:id', function(req, res){
   const id = req.params.id;
   const sql =`SELECT * FROM phones WHERE id="${id}"`;
+
   db.all(sql, [], (err, row) => {
     if (err) {
       throw err;
@@ -62,18 +67,29 @@ app.get('/devices/:id', function(req, res){
 });
 
 // Route for inserting data into the Database
-app.post('/devices', function(req, res) {
-    var brand, model, image, screensize, os;
+app.post('/add', function(req, res) {
+  // data for addind a new device
+  const brand = req.body.brand;
+  const model = req.body.model;
+  const os = req.body.os;
+  const image = req.body.image;
+  const screensize = req.body.screensize;
 
-    brand = req.body.brand;
-    model = req.body.model;
-    os = req.body.os;
-    image = req.body.image;
-    screensize = req.body.screensize;
+  if(!brand){
+    abort
+  }
 
+  // sql command
+  const sql = `INSERT INTO phones (brand, model, os, image, screensize)
+                VALUES("${brand}", "${model}", "${os}", "${image}", "${screensize}")`;
 
-    res.send('New element: ' + brand + ' ' + model + ' ' + image + ' ' + screensize + ' ' + os);
-    console.log('it worked...kinda');
+  db.run(sql, [], function(err){
+    if(err) {
+      return console.log(err.message);
+    }
+    console.log('');
+    return res.json(`New element with id ${this.lastID} got created!`);
+  });
 });
 
 // Route for updating data over the device id in the Database --> recieve data from req.body?!
@@ -86,8 +102,11 @@ app.put('/update/:id', function(req, res){
   const image = req.body.image;
   const screensize = req.body.screensize;
 
+  // sql command
+  const sql1 = `SELECT * FROM phones WHERE id="${id}"`;
+
   // look up the device with SQL first
-  db.all(`SELECT * FROM phones WHERE id="${id}"`, [], function(err, row) {
+  db.all(sql1, [], function(err, row) {
     if(err){
       return console.error(err.message);
     }
@@ -97,12 +116,12 @@ app.put('/update/:id', function(req, res){
     }
   });
 
-  const sql =`UPDATE phones
+  const sql2 =`UPDATE phones
           SET brand="${brand}", model="${model}", os="${os}", image="${image}", screensize="${screensize}"
           WHERE id="${id}"`;
 
   // SQL logic to update course
-  db.run(sql, [], function(err, row) {
+  db.run(sql2, [], function(err) {
     if(err){
       return console.error(err.message);
     }
@@ -116,17 +135,17 @@ app.put('/update/:id', function(req, res){
 
 // Route for deleting a device with a given id
 app.delete('/delete/:id', function(req, res){
-  const id = req.param.id;
-  const sql = `DELETE FROM phones WHERE id="${id}"`;
+  var id = req.params.id;
+  var sql = `DELETE FROM phones WHERE id="${id}"`;
 
   db.run(sql, [], function(err){
     if (err) {
       return console.error(err.message);
     }
+  });
       console.log('Device with id ' + id + ' was deleted successfully!');
 
       res.json('Device was deleted!');
-    });
 });
 
 // Route for clearing all data in the database
