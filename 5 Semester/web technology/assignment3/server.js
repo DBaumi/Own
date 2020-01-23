@@ -32,23 +32,23 @@ let db = my_database('./phones.db');
 // defining routes.
 //
 // First, create an express application `app`:
-
 var express = require("express");
+var bodyParser = require('body-parser');
 var app = express();
 // enable recieving JSON data
-app.use(express.json());
+app.use(bodyParser.json());
+
 
 // Route for getting the list of devices
 app.get('/devices', function(req, res){
   // sql statement
   const sql = `SELECT * FROM phones`;
   db.all(sql, [], (err, rows) => {
-    if (err) {
-      throw err;
-    }
-    // send response for the request
-    rows ? res.json(rows) : res.status(404).send('Devices could not be found!')
+    if (err) throw err;
 
+    // send response for the request
+    // if the rows are empty, a error message will be printed
+    rows ? res.json(rows) : res.status(404).send('No devices in the database!');
   });
 });
 
@@ -57,11 +57,12 @@ app.get('/devices/:id', function(req, res){
   const id = req.params.id;
   const sql =`SELECT * FROM phones WHERE id="${id}"`;
 
+  // look for the device with the given id
   db.all(sql, [], (err, row) => {
-    if (err) {
-      throw err;
-    }
-    // send response
+    if (err) throw err;
+
+    // send response for the request
+    // if the rows are empty, a error message will be printed
     row ? res.json(row) : res.status(404).send('Device with the id ' + id + ' was not found!');
   });
 });
@@ -75,19 +76,20 @@ app.post('/add', function(req, res) {
   const image = req.body.image;
   const screensize = req.body.screensize;
 
-  if(!brand){
-    abort
-  }
+  // check if neccesary data is in the body
+
+  // check if data in database
 
   // sql command
   const sql = `INSERT INTO phones (brand, model, os, image, screensize)
                 VALUES("${brand}", "${model}", "${os}", "${image}", "${screensize}")`;
 
+  // add the new element in the database with sql
   db.run(sql, [], function(err){
     if(err) {
       return console.log(err.message);
     }
-    console.log('');
+    console.log('Device successfully added!');
     return res.json(`New element with id ${this.lastID} got created!`);
   });
 });
@@ -139,13 +141,11 @@ app.delete('/delete/:id', function(req, res){
   var sql = `DELETE FROM phones WHERE id="${id}"`;
 
   db.run(sql, [], function(err){
-    if (err) {
-      return console.error(err.message);
-    }
+    if (err) return console.error(err.message);
   });
-      console.log('Device with id ' + id + ' was deleted successfully!');
 
-      res.json('Device was deleted!');
+  console.log('Device with id ' + id + ' was deleted successfully!');
+  res.json('Device was deleted!');
 });
 
 // Route for clearing all data in the database
@@ -158,21 +158,6 @@ app.delete('/db-clear', function(req, res){
     console.log('All data in the database got cleared successfully!');
     res.json("All data on table got erased!");
   });
-});
-
-// This route responds to http://localhost:3000/db-example by selecting some data from the
-// database and return it as JSON object.
-// Please test if this works on your own device before you make any changes.
-app.get('/db-example', function(req, res) {
-    // Example SQL statement to select the name of all products from a specific brand
-    db.all(`SELECT * FROM phones WHERE brand=?`, ['Fairphone'], function(err, rows) {
-
-    	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
-    	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
-
-    	// # Return db response as JSON
-    	return res.json(rows)
-    });
 });
 
 // ###############################################################################
