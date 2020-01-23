@@ -35,40 +35,110 @@ let db = my_database('./phones.db');
 
 var express = require("express");
 var app = express();
+// enable recieving JSON data
+app.use(express.json());
 
-// ###############################################################################
-// Routes
-//
-// TODO: Add your routes here and remove the example routes once you know how
-//       everything works.
-// ###############################################################################
+// Route for getting the list of devices
+app.get('/devices', function(req, res){
+  db.all(`SELECT * FROM phones`, [], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    return res.json(rows)
+  });
+});
 
-// Routes we need:
-//  -
+// Route for getting one specific device
+app.get('/devices/:id', function(req, res){
+  const id = req.params.id;
+  const sql =`SELECT * FROM phones WHERE id="${id}"`;
+  db.all(sql, [], (err, row) => {
+    if (err) {
+      throw err;
+    }
+    // send response
+    row ? res.json(row) : res.status(404).send('Device with the id ' + id + ' was not found!');
+  });
+});
 
-// This route responds to .../add-item by adding a new element into the database and return
-// the added as JSON object.
-app.get('/add-item-get', function(req, res) {
-  // define variables and assign them first
-  var brand, model, image, screensize, os;
+// Route for inserting data into the Database
+app.post('/devices', function(req, res) {
+    var brand, model, image, screensize, os;
 
-  brand = req.query.brand;
-  model = req.query.model;
-  image = req.query.image;
-  screensize = req.query.screensize;
-  os = req.query.os;
-
-  // add item to the database
-  // insert one row into the langs table
-  db.run(`INSERT INTO phones VALUES(brand, model, os, image, screensize)`,
-    [brand, mode, os, image, screensize]);
-    console.log('Successfull!');
+    brand = req.body.brand;
+    model = req.body.model;
+    os = req.body.os;
+    image = req.body.image;
+    screensize = req.body.screensize;
 
 
-  response_body = {'brand': brand, 'model': model, 'os': os, 'image': image, 'screensize': screensize};
+    res.send('New element: ' + brand + ' ' + model + ' ' + image + ' ' + screensize + ' ' + os);
+    console.log('it worked...kinda');
+});
 
-  // set response header
-  res.json(response_body);
+// Route for updating data over the device id in the Database --> recieve data from req.body?!
+app.put('/update/:id', function(req, res){
+  // data for updating
+  const id = req.params.id;
+  const brand = req.body.brand;
+  const model = req.body.model;
+  const os = req.body.os;
+  const image = req.body.image;
+  const screensize = req.body.screensize;
+
+  // look up the device with SQL first
+  db.all(`SELECT * FROM phones WHERE id="${id}"`, [], function(err, row) {
+    if(err){
+      return console.error(err.message);
+    }
+
+    if(!row){
+      res.status(404).send('Device with the id ' + id + ' was not found!');
+    }
+  });
+
+  const sql =`UPDATE phones
+          SET brand="${brand}", model="${model}", os="${os}", image="${image}", screensize="${screensize}"
+          WHERE id="${id}"`;
+
+  // SQL logic to update course
+  db.run(sql, [], function(err, row) {
+    if(err){
+      return console.error(err.message);
+    }
+    // send response
+    res.send('Device with id ' + id + ' was updated successfully!');
+
+    // TODO: set the appropriate HTTP response headers and HTTP response codes here.
+
+  });
+});
+
+// Route for deleting a device with a given id
+app.delete('/delete/:id', function(req, res){
+  const id = req.param.id;
+  const sql = `DELETE FROM phones WHERE id="${id}"`;
+
+  db.run(sql, [], function(err){
+    if (err) {
+      return console.error(err.message);
+    }
+      console.log('Device with id ' + id + ' was deleted successfully!');
+
+      res.json('Device was deleted!');
+    });
+});
+
+// Route for clearing all data in the database
+app.delete('/db-clear', function(req, res){
+  const sql = `DELETE FROM phones`;
+  db.run(sql, [], function(err){
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('All data in the database got cleared successfully!');
+    res.json("All data on table got erased!");
+  });
 });
 
 // This route responds to http://localhost:3000/db-example by selecting some data from the
@@ -90,6 +160,7 @@ app.get('/db-example', function(req, res) {
 // This should start the server, after the routes have been defined, at port 3000:
 
 app.listen(3000);
+console.log('Listening on port 3000 ...');
 
 // ###############################################################################
 // Some helper functions called above
