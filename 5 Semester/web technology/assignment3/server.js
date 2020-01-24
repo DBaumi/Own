@@ -33,11 +33,11 @@ let db = my_database('./phones.db');
 //
 // First, create an express application `app`:
 var express = require("express");
-var bodyParser = require('body-parser');
 var app = express();
+var bodyParser = require("body-parser");
+
 // enable recieving JSON data
 app.use(bodyParser.json());
-
 
 // Route for getting the list of devices
 app.get('/devices', function(req, res){
@@ -70,7 +70,7 @@ app.get('/devices/:id', function(req, res){
 // Route for inserting data into the Database
 app.post('/add', function(req, res) {
   // data for addind a new device
-  const brand = req.body.brand;
+  var brand = req.body.brand;
   const model = req.body.model;
   const os = req.body.os;
   const image = req.body.image;
