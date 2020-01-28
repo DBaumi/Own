@@ -1,0 +1,40 @@
+body {
+    font-family: 'Lato', sans-serif;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+footer {
+    background: #dddddd url(https://q-mobilitysolutions.nl/wp-content/uploads/2015/04/Q-MobilitySolutions-black-gradient-background.png) repeat-x center;
+    color: white;
+    margin: 1% 0 0 0;
+    width: 100%;
+    height: auto;
+    padding: 5px 5px;
+    background-color: #dddddd;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 22px;
+    border-bottom: solid 1px black;
+}
+
+h2 {
+    font-variant: small-caps;
+    font-size: 18px;
+}
+
+table {
+    width: 50%;
+    margin: 0 25%;
+    caption-side: bottom;
+    border: solid 2px black;
+}
+
+td,
+th {
+    border: 1px solid black;
+    text-align: center;
+    width: 20%;
+}
