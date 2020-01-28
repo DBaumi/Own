@@ -1,3 +1,5 @@
+/*short css sheet to make the HTML page easier to read*/
+
 body {
     font-family: 'Lato', sans-serif;
     margin-left: 15px;
@@ -26,8 +28,8 @@ h2 {
 }
 
 table {
-    width: 50%;
-    margin: 0 25%;
+    width: 75%;
+    margin: 0 12.5%;
     caption-side: bottom;
     border: solid 2px black;
 }
@@ -37,4 +39,9 @@ th {
     border: 1px solid black;
     text-align: center;
     width: 20%;
+}
+
+thead {
+    background-color: #dddddd;
+    font-size: larger;
 }

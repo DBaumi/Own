@@ -34,6 +34,7 @@ CSS g: validator check
 
 -- ASSIGNMENT 2
 Sortable table
+    Everything in order
     
 Reset button
     12 points: database is correctly reset
