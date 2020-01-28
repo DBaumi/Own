@@ -1,0 +1,52 @@
+-- ASSIGNMENT 1
+
+HTML b: Interactive form
+    Form works correctly but image should have been of type url, not image (-1)
+
+HTML c: Validator check
+    Identical IDs used. An ID is used to identify one unique element, whereas a class is used to identify more than one (-2).
+
+HTML d: Misc
+    Somewhat inconsistent indentations (-1). Proper file name and nice comments
+
+HTML e: Penalty for style and other bad markup
+    Try avoid using <br> tag to create whitespace or new lines, for every use (2), -2 points
+
+CSS b: print style
+    Print style looks good, removing content only useful online, such as form and links. Only thing is that images could have been grayscaled, no points subtracted
+
+CSS c: screen style
+    Screen and print styles are sufficiently different
+
+CSS d: Responsive design
+    Mobile design looks good
+
+CSS e:
+    Browser compatibility report shows differences between browsers
+
+CSS f: Misc
+    master.css should have been named screen.css to follow naming convention mentioned in the assignment text (-1).
+
+CSS g: validator check
+    Parse error for master.css, you forgot the closing bracket for the portrait mobile view that should have been on line 197
+
+
+
+-- ASSIGNMENT 2
+Sortable table
+    
+Reset button
+    12 points: database is correctly reset
+    3 points: table also dynamically rebuild
+
+Dynamic table
+    10 points correctly sending get request when page is loaded
+    20 points for inserting the values into the table
+    5 points for correctly getting the form values
+    -10 points for not correctly posting the data to the server (The data is never added)
+    -5 Not cancelling the default event handling (preventDefault)
+    -5 not correctly inserting form values in the table (data is not added to the table)
+
+Misc
+    -1 use of <script> tag used inside HTML
+    -1 Javascript files are typically called script.js or main.js
