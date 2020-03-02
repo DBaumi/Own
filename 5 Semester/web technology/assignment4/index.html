@@ -1,0 +1,304 @@
+<!--
+  Infos regarding the ASSIGNMENT 4
+
+  Names: David Baumgartner, Alvin Milaqi
+  Studentnumbers: 2675675, 2672335
+  VU-net IDs: drb318, ami338
+  Lab Group: 80
+  Remarks: HTML5
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Assignment 4</title>
+
+    <!-- declare meta data -->
+    <meta charset="utf-8">
+    <meta name="author" content="David Baumgartner, Alvin Milaqi">
+    <meta name="description" content="Synthesis & Evaluation">
+
+    <!-- link stylesheet -->
+    <link rel="stylesheet" href="css/master.css">
+    <!-- importing a google font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- introduction -->
+    <section>
+        <h1>Introduction</h1>
+        <h2>Front matter</h2>
+        <p>Title: Synthesis & Evaluation</p>
+        <p>Date of the evaluation: 28/01/2020</p>
+        <p>Group number: 80</p>
+        <p>Author names: Alvin Milaqi, David Baumgartner</p>
+
+        <h2>Overview</h2>
+        <p>
+            We think the website in general is easily navigable as it is simple and not very rich in diverse content. While the sections are in an optimal order, changing their order will not render them incomprehensible as they are all mostly independent of each
+            other. We have also used some colors in certain areas to make content even more easily viewable. Some people with disabilities may also able to easily navigate our website via keyboard, eye-tracking or speech navigation without encountering
+            any issues.
+        </p>
+    </section>
+
+    <!-- Accessability highlights -->
+    <section>
+        <h1>Accessability highlights</h1>
+        <p>
+            We think some of the most relevant guidelines are 1.4.1 because we made sure to use color to make content more distinguishable and 2.4.3 because no matter what order the webpage sections are viewed in, their meaning does not change.
+        </p>
+    </section>
+
+    <!-- improvement plan -->
+    <section>
+        <h1>Improvement plan</h1>
+
+        <h2>Changes based on Appendix A</h2>
+        <p>Important changes: </p>
+        <ul>
+            <li>add alternative text to each img tag</li>
+            <li>in addition to the form submission error text, add a sound for extra feedback</li>
+        </ul>
+
+        <h2>Changes based on Appendix B</h2>
+        <p>Important changes: </p>
+        <ul>
+            <li>validate check all HTML and CSS files after applying changes</li>
+            <li>fix the http post request to the server so, that data can be send. Possible solutions:</li>
+            <ul>
+                <li>check if the send data is in JSON format (set request type to "application/json")</li>
+                <li>check if the server recieved the request</li>
+                <li>check what type of request the server is recieving (also check network activity)</li>
+            </ul>
+            <li>add code to prevent the default event handling (preventDefault)</li>
+            <li>adjust file names to the naming convention</li>
+        </ul>
+
+        <p>Nice to have changes: </p>
+        <ul>
+            <li>make assignment 2 work with the created web server from assignment 3</li>
+            <li>for dynamically filling the table, use a different way to execute the js code and do not use the "script" tag</li>
+            <li>delete all "br" tags</li>
+            <li>instead of using IDs for the navigation links, use class</li>
+            <li>correcly adjust the form tags (change from type "img" to "url")</li>
+        </ul>
+
+    </section>
+
+    <!-- Appendix A -->
+    <section>
+        <h1>Appendix A</h1>
+        <table>
+            <caption>Web Content Accessibility Guidelines</caption>
+            <thead>
+                <tr>
+                    <th>Guideline</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.1</td>
+                    <td>DNA because there is no non-text form of control</td>
+                </tr>
+                <tr>
+                    <td>1.1</td>
+                    <td>DNA because there is not time-based media</td>
+                </tr>
+                <tr>
+                    <td>1.1</td>
+                    <td>
+                        Form submission error is only in text. A sound for the announcement might be an improvement.
+                    </td>
+                </tr>
+                <tr>
+                    <td>1.1</td>
+                    <td>Phone images don’t have a text alternative.</td>
+                </tr>
+                <tr>
+                    <td>1.1</td>
+                    <td>There is no captcha</td>
+                </tr>
+                <tr>
+                    <td>1.1</td>
+                    <td>There is no decorative text</td>
+                </tr>
+                <tr>
+                    <td>1.3.1</td>
+                    <td>Information, structure, and relationships conveyed through presentation can be programmatically determined or are available in text.</td>
+                </tr>
+                <tr>
+                    <td>1.3.2</td>
+                    <td>Content sequence does not affect meaning.</td>
+                </tr>
+                <tr>
+                    <td>1.3.3</td>
+                    <td>There are no instruction on how to navigate the website as they are not necessary due to the simplicity of the website.</td>
+                </tr>
+                <tr>
+                    <td>1.4.1</td>
+                    <td>Different colored rows in tables are used to make them more easily distinguishable from each other.</td>
+                </tr>
+                <tr>
+                    <td>1.4.2</td>
+                    <td>There is no audio to be paused.</td>
+                </tr>
+                <tr>
+                    <td>2.1.1</td>
+                    <td>Website is navigable by keyboard.</td>
+                </tr>
+                <tr>
+                    <td>2.1.2</td>
+                    <td>Keyboard navigation cannot be trapped by website features.</td>
+                </tr>
+                <tr>
+                    <td>2.4.1</td>
+                    <td>Content is not repeated and there is only one webpage.</td>
+                </tr>
+                <tr>
+                    <td>2.4.2</td>
+                    <td>Each section and the webpage itself are titled.</td>
+                </tr>
+                <tr>
+                    <td>2.4.3</td>
+                    <td>Content sequence does not affect meaning.</td>
+                </tr>
+                <tr>
+                    <td>2.4.4</td>
+                    <td>The purpose of each link can be determined from the link text alone or from the link text together with its programmatically determined link context, except where the purpose of the link would be ambiguous to users in general.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Appendix B -->
+    <section>
+        <h1>Appendix B</h1>
+        <table>
+            <caption>TA feedback</caption>
+            <thead>
+                <tr>
+                    <th>Assignment Nr</th>
+                    <th>Name</th>
+                    <th>Feedback</th>
+                    <th>Type of feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Assignment 1: HTML</td>
+                    <td>Interactive form</td>
+                    <td>Form works correctly but image should have been of type url, not image</td>
+                    <td>technical implementation detail</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Validator check</td>
+                    <td>Identical IDs used. An ID is used to identify one unique element, whereas a class is used to identify more than one</td>
+                    <td>negative aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Misc</td>
+                    <td>Somewhat inconsistent indentations. Proper file name and nice comments</td>
+                    <td>technical implementation detail/positive aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Penalty for style and other bad markup</td>
+                    <td>Try avoid using
+                        < br> tag to create whitespace or new lines</td>
+                    <td>negative aspect</td>
+                </tr>
+                <tr>
+                    <td>Assignment 1: CSS</td>
+                    <td>Print style</td>
+                    <td>Print style looks good, removing content only useful online, such as form and links. Only thing is that images could have been grayscaled</td>
+                    <td>technical implementation detail/positive aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Screen style</td>
+                    <td>Screen and print styles are sufficiently different</td>
+                    <td>positive aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Responsive design</td>
+                    <td>Mobile design looks good</td>
+                    <td>positive aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Browser compatibility report</td>
+                    <td>Browser compatibility report shows differences between browsers</td>
+                    <td>positive aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Misc</td>
+                    <td>master.css should have been named screen.css to follow naming convention mentioned in the assignment text</td>
+                    <td>negative aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Valdator check</td>
+                    <td> Parse error for master.css, you forgot the closing bracket for the portrait mobile view that should have been on line 197</td>
+                    <td>negative aspect</td>
+                </tr>
+                <tr>
+                    <td>Assignment 2: Javascript/AJAX</td>
+                    <td>Sortable table</td>
+                    <td>Everything in order</td>
+                    <td>positive aspect</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Reset button</td>
+                    <td>
+                        <ul>
+                            <li>database is correctly reset</li>
+                            <li>table also dynamically rebuild</li>
+                        </ul>
+                    </td>
+                    <td>positive aspects</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Dynamic table</td>
+                    <td>
+                        <ui>
+                            <li>correctly sending get request when page is loaded</li>
+                            <li>inserting the values into the table</li>
+                            <li>correctly getting the form values</li>
+                            <li>not correctly posting the data to the server (The data is never added)</li>
+                            <li>Not cancelling the default event handling (preventDefault)</li>
+                            <li>not correctly inserting form values in the table (data is not added to the table)</li>
+                        </ui>
+                    </td>
+                    <td>negative/positive aspects</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Misc</td>
+                    <td>
+                        <ul>
+                            <li>use of "script" tag used inside HTML</li>
+                            <li>Javascript files are typically called script.js or main.js</li>
+                        </ul>
+                    </td>
+                    <td>technical implementation details/negative aspects</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footerText">David Baumgartner, Alvin Milaqi</p>
+    </footer>
+</body>
+
+</html>

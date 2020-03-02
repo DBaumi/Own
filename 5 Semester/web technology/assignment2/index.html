@@ -1,0 +1,232 @@
+<!--
+  Infos regarding the ASSIGNMENT 2
+
+  Names: David Baumgartner, Alvin Milaqi
+  Studentnumbers: 2675675, 2672335
+  VU-net IDs: drb318, ami338
+  Lab Group: 80
+  Remarks: HTML5
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- declare meta data -->
+  <meta charset="utf-8">
+  <meta name="author" content="David Baumgartner, Alvin Milaqi">
+  <meta name="description" content="web shop for mobile devices">
+
+  <!-- link stylesheet -->
+  <link rel="stylesheet" href="css/master.css">
+  <link rel="stylesheet" href="css/print.css">
+  <!-- importing a google font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <!-- import javascript file -->
+  <script type="text/javascript" src="js/dynamic-site.js">
+
+  </script>
+
+  <title>Assignment 2</title>
+</head>
+
+<body>
+  <!--Navigation-->
+  <nav>
+    <a href="index.html" id="navlink"> Home </a>
+    <a href="#" id="navlink"> Shipping </a>
+    <a href="#" id="navlink"> About </a>
+    <a href="https://www.mobileshop.eu/nl/" target="_blank" id="navlink"> Partner </a>
+  </nav>
+  <!--Introduction-->
+  <section>
+    <h1> Introduction </h1>
+    <pre>
+      As a small introduction, here is a random generated pok&eacute;mon quote from <a href="https://codepen.io/wztan/pen/MaxbjE">codepen.io</a>:
+          "If the Pokemon I liked were there, I’d go anywhere. That’s what a real trainer does."  -   Cool Trainer Emma
+      Note, how pre keeps the space from the html code unlike text in the p tag!
+        </pre>
+    <h2> This is our first assignment. </h2>
+    <p>
+      It should <strong>hopefully</strong> come up as a basic mobile shop unless we mess it up.
+    </p>
+    <p class="cite">
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+      sea takimata sanctus est Lorem ipsum dolor sit amet.
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+      sea takimata sanctus est Lorem ipsum dolor sit amet."
+    </p>
+
+    <section>
+      <h3>Why shop on this platform?</h3>
+      <ol>
+        <li>Great design</li>
+        <li>A Pok&eacute;mon quote</li>
+        <li>You need more reasons?</li>
+      </ol>
+    </section>
+  </section>
+
+  <!--Device List-->
+  <section>
+    <h2> Device list </h2>
+    <ul>
+      <li> Apple </li>
+      <li> Samsung </li>
+      <li> OnePlus </li>
+    </ul>
+  </section>
+
+  <!--Definitions-->
+  <section>
+    <h2>Definitions</h2>
+    <dl>
+      <dt> Screen Size </dt>
+      <dd> <em>size in inches</em> </dd>
+      <dt> <abbr title="Operating system">OS</abbr> </dt>
+      <dd> <em>User Interface</em> </dd>
+    </dl>
+  </section>
+
+  <!--Actual Products-->
+  <section class="sectionProductsInStock">
+    <h1>Products in our shop</h1>
+    <h2> Available products </h2>
+    <!--Table 1 (in stock)-->
+    <!--
+    Unfortunately, we were not able to finish exercise 4 because we could not find the error.
+    However, for testing the reset button, please use the form tag in line 98 instead of the form tag in line 100.
+    <form action="https://wt.ops.labs.vu.nl/api20/5448bd47" method="post">
+    -->
+    <form class="newElement" method="" action="">
+      <table class="tableInStock" id="firstTable">
+        <caption> List of devices in stock</caption>
+        <tr>
+          <th class="sortable" onclick="sortTable(0, 1)"> Brand </th>
+          <th class="sortable" onclick="sortTable(1, 1)"> Model </th>
+          <th> Image </th>
+          <th class="sortable" onclick="sortTable(3, 1)"> Screen Size </th>
+          <th class="sortable" onclick="sortTable(4, 1)"> Operating System </th>
+        </tr>
+        <tr>
+          <td> OnePlus </td>
+          <td> 7T </td>
+          <td>
+            <figure>
+              <img src="https://www.91-img.com/pictures/136164-v2-oneplus-8-pro-mobile-phone-large-1.jpg">
+              <figcaption>Image 1 of 6</figcaption>
+            </figure>
+          </td>
+          <td> 6.3 </td>
+          <td> Android 10</td>
+        </tr>
+        <tr>
+          <td> Apple </td>
+          <td> iPhone 10 </td>
+          <td>
+            <figure>
+              <img src="https://images-na.ssl-images-amazon.com/images/I/71yMgOenT5L._AC_SX679_.jpg">
+              <figcaption>Image 2 of 6</figcaption>
+            </figure>
+          </td>
+          <td> 6.0 </td>
+          <td> iOS </td>
+        </tr>
+        <tr>
+          <td> Samsung </td>
+          <td> S10+ </td>
+          <td>
+            <figure>
+              <img src="https://image.coolblue.nl/max/500x500/products/1221718">
+              <figcaption>Image 3 of 6</figcaption>
+            </figure>
+          </td>
+          <td> 6.7 </td>
+          <td> Android Pie 9.0 </td>
+        </tr>
+        <!-- this is the row for the form -->
+        <tr class="formInputFields">
+          <td> <input id="deviceBrand" type="text" name="brand" placeholder="brand" required> </td>
+          <td> <input id="deviceModel" type="text" name="model" placeholder="model" required> </td>
+          <td> <input id="deviceImg" type="file" name="image"> </td>
+          <td> <input id="deviceScreensize" type="number" name="screensize" placeholder="screensize"> </td>
+          <td> <input id="deviceOS" type="text" name="os" placeholder="operating system"> </td>
+        </tr>
+        <tr class="formRowInTable">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <button class="sortable" type="reset" name="reset" onclick="resetAndRefillTable()">Reset</button>
+          </td>
+          <td>
+            <input class="sortable" type="submit" value="Submit device" onclick="sendFormData()">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </section>
+
+  <!--Table 2 (out of stock)-->
+  <section>
+    <h2>Products out of stock</h2>
+    <table class="tableOutOfStock" id="secondTable">
+      <caption> List of devices out of stock</caption>
+      <thead>
+        <tr>
+          <th class="sortable" onclick="sortTable(0, 2)"> Brand </th>
+          <th class="sortable" onclick="sortTable(1, 2)"> Model </th>
+          <th> Image </th>
+          <th class="sortable" onclick="sortTable(3, 2)"> Screen Size </th>
+          <th class="sortable" onclick="sortTable(4, 2)"> Operating System </th>
+        </tr>
+      </thead>
+      <tbody id="contentToFillDynamically">
+        <script> dynamicTableFillUp(); </script>
+      </tbody>
+
+      <!--
+      <tr>
+        <td> OnePlus </td>
+        <td> 7T Pro </td>
+        <td>
+          <figure>
+            <img src="https://www.91-img.com/pictures/136164-v2-oneplus-8-pro-mobile-phone-large-1.jpg">
+            <figcaption>Image 4 of 6</figcaption>
+          </figure>
+        </td>
+        <td> 6.3 </td>
+        <td> Android 10 </td>
+      </tr>
+      <tr>
+        <td> Apple </td>
+        <td> iPhone 11 </td>
+        <td>
+          <figure>
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71yMgOenT5L._AC_SX679_.jpg">
+            <figcaption>Image 5 of 6</figcaption>
+          </figure>
+        </td>
+        <td> 6.0 </td>
+        <td> iOS </td>
+      </tr>
+      <tr>
+        <td> Samsung </td>
+        <td> S9 </td>
+        <td>
+          <figure>
+            <img src="https://image.coolblue.nl/max/500x500/products/991998">
+            <figcaption>Image 6 of 6</figcaption>
+          </figure>
+        </td>
+        <td> 6.1 </td>
+        <td> Android Pie 9.0 </td>
+      </tr> -->
+    </table>
+  </section>
+
+  <footer>
+    <p class="footerText">David Baumgartner, Alvin Milaqi</p>
+  </footer>
+</body>
+
+</html>

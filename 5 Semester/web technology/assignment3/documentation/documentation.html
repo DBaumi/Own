@@ -1,0 +1,265 @@
+<DOCTYPE html>
+  <html lang="en">
+      <head>
+          <!-- declare meta data -->
+    <meta charset="utf-8">
+    <meta name="author" content="David Baumgartner, Alvin Milaqi">
+    <title>Documentation</title>
+      <!-- link stylesheet -->
+      <link rel="stylesheet" href="doc.css" type="text/css">
+      </head>
+      <body>
+          <h1>Documentation</h1>
+          <h2>
+              To make the api RESTful, we used the GET http request to retrieve data from the server side, then we used POST 
+              to add/create new data in the database, PUT was used to update the elements of the database and DELETE was used 
+              to delete the data. We made sure to guarantee that all our GET http requests were safe to keep the data from harm, 
+              in JSON format for both success and failed responses, and that they were idempotent.
+          </h2>
+          <p>
+              <figure>
+                  <figcaption>GET for list of devices</figcaption>
+                  <pre>
+                    <code>
+                      app.get('/devices', function(req, res) {
+                        // sql statement
+                        const sql = `SELECT * FROM phones`;
+                        db.all(sql, [], (err, rows) => {
+                            if (err) throw err;
+                    
+                            // send response for the request
+                            // if the rows are empty, a error message will be printed
+                            if (rows.length > 0) {
+                                res.status(200);
+                                return res.json(rows);
+                            } else {
+                                res.status(404);
+                                return res.json('No devices in the database!');
+                            }
+                        });
+                    });                    
+                    </code>
+                  </pre>
+                </figure>
+          </p>
+          <p>
+              Endpoint URI: http://localhost:3000/devices 
+              HTTP response code for success = 200 
+              HTTP response code for failure = 404
+              Format: JSON
+          </p>
+          <p>
+              <figure>
+                  <figcaption>GET for specific device</figcaption>
+                  <pre>
+                    <code>
+                      app.get('/devices/:id', function(req, res) {
+                        const id = req.params.id;
+                        const sql = `SELECT * FROM phones WHERE id="${id}"`;
+                    
+                        // look for the device with the given id
+                        db.all(sql, [], (err, row) => {
+                            if (err) throw err;
+                    
+                            // send response for the request
+                            // if the rows are empty, a error message will be printed
+                            if (row.length == 0) {
+                                res.status(404);
+                                return res.json('Device with the id ' + id + ' was not found!');
+                            } else {
+                                res.status(200);
+                                return res.json(row);
+                            }
+                        });
+                    });
+                    </code>
+                  </pre>
+                </figure>
+          </p>
+          <p>
+              Endpoint URI: http://localhost:3000/devices/:id 
+              HTTP response code for success = 200 
+              HTTP response code for failure = 404
+              Format: JSON
+          </p>
+          <p>
+              <figure>
+                  <figcaption>POST for inserting data in database</figcaption>
+                  <pre>
+                    <code>
+                      app.post('/add', function(req, res) {
+                        // data for addind a new device
+                        const brand = req.body.brand;
+                        const model = req.body.model;
+                        const os = req.body.os;
+                        const image = req.body.image;
+                        const screensize = req.body.screensize;
+                    
+                        // check if neccesary data is in the body
+                        if (!brand || !model) {
+                            return res.status(400).send('Bad request! Brand and model for device are required to add a new device!');
+                        }
+                        // check if data in database
+                        const sqlCheck = `SELECT * FROM phones 
+                                          WHERE brand="${brand}" AND model="${model}" AND os="${os}" AND image="${image}" AND screensize="${screensize}"`;
+                    
+                        db.all(sqlCheck, [], function(err, row) {
+                    
+                            if (err) return console.log(err.message);
+                    
+                            // if the sqlCheck request returns one row, then the device already exists on the database
+                            if (row.length > 0) {
+                                console.log('Device already in datbase, aborting request...');
+                                res.status(400);
+                                return res.json('Bad request! Device is already in the database!');
+                            }
+                            // execute, when sqlCheck returns an empty row
+                            else {
+                                console.log('Device not in database, continue request...');
+                                res.status(200);
+                    
+                                // sql command
+                                const sql = `INSERT INTO phones (brand, model, os, image, screensize)
+                                    VALUES("${brand}", "${model}", "${os}", "${image}", "${screensize}")`;
+                    
+                                // add the new element in the database with sql
+                                db.run(sql, [], function(err) {
+                                    if (err) return console.log(err.message);
+                    
+                                    console.log(`Device with ${this.lastID} created...`);
+                                    return res.json(`New element with id ${this.lastID} got created!`);
+                                });
+                    
+                            }
+                        });
+                    });                 
+                    </code>
+                  </pre>
+                </figure>
+          </p>
+          <p>
+              Endpoint URI: http://localhost:3000/add 
+              HTTP response code for success = 200 
+              HTTP response code for failure = 404
+              Format: JSON
+          </p>
+          <p>
+              <figure>
+                  <figcaption>PUT for updating data in database</figcaption>
+                  <pre>
+                    <code>
+                      app.put('/update/:id', function(req, res) {
+                        // data for updating
+                        const id = req.params.id;
+                        const brand = req.body.brand;
+                        const model = req.body.model;
+                        const os = req.body.os;
+                        const image = req.body.image;
+                        const screensize = req.body.screensize;
+                    
+                        // sql command
+                        const sqlCheck = `SELECT * FROM phones WHERE id="${id}"`;
+                    
+                        // look up the device with SQL first
+                        db.all(sqlCheck, [], function(err, row) {
+                            if (err) return console.error(err.message);
+                            // execute, when the row has no element and print error
+                            if (!row) return res.status(404).send('Device with the id ' + id + ' was not found!');
+                    
+                            // execute, when the row has one element
+                            else {
+                                // sql command
+                                const sql2 = `UPDATE phones
+                                              SET brand="${brand}", model="${model}", os="${os}", image="${image}", screensize="${screensize}"
+                                              WHERE id="${id}"`;
+                    
+                                // SQL logic to update course
+                                db.run(sql2, [], function(err) {
+                                    if (err) return console.error(err.message);
+                    
+                                    // send response
+                                    res.status(200);
+                                    console.log('Device with id ' + id + ' was updated successfully!');
+                                    return res.json(row);
+                                });
+                            }
+                        });
+                    });    
+                    </code>
+                  </pre>
+                </figure>
+          </p>
+          <p>
+              Endpoint URI: http://localhost:3000/update/:id 
+              HTTP response code for success = 200 
+              HTTP response code for failure = 404
+              Format: JSON
+          </p>
+          <p>
+              <figure>
+                  <figcaption>DELETE for a given device</figcaption>
+                  <pre>
+                    <code>
+                      app.delete('/delete/:id', function(req, res) {
+                        // search for device with given id
+                        const id = req.params.id;
+                        const sqlCheck = `SELECT * FROM phones WHERE id="${id}"`;
+                        db.all(sqlCheck, [], function(err, row) {
+                            if (err) return console.error(err.message);
+                    
+                            // execute, when device not in the database
+                            if (row.length == 0) {
+                                res.status(404);
+                                return res.json(`Device with id: ${id} was not found in the database!`);
+                            } else {
+                                res.status(200);
+                                const sql = `DELETE FROM phones WHERE id="${id}"`;
+                    
+                                db.run(sql, [], function(err) {
+                                    if (err) return console.error(err.message);
+                                });
+                    
+                                console.log('Device with id ' + id + ' was deleted successfully...');
+                                return res.json('Device got deleted!');
+                    
+                            }
+                        });
+                    }); 
+                    </code>
+                  </pre>
+                </figure>
+          </p>
+          <p>
+              Endpoint URI: http://localhost:3000/delete/:id 
+              HTTP response code for success = 200 
+              HTTP response code for failure = 404
+              Format: JSON
+          </p>
+          <p>
+              <figure>
+                  <figcaption>DELETE for entire database</figcaption>
+                  <pre>
+                    <code>
+                      app.delete('/db-clear', function(req, res) {
+                        const sql = `DELETE FROM phones`;
+                        db.run(sql, [], function(err) {
+                            if (err) return console.error(err.message);
+                            console.log('All data in the database got cleared successfully!');
+                    
+                            res.status(200);
+                            return res.json("All data on table got erased!");
+                        });
+                    });          
+                    </code>
+                  </pre>
+                </figure>
+          </p>
+          <p>
+              Endpoint URI: http://localhost:3000/db-clear 
+              HTTP response code for success = 200 
+              HTTP response code for failure = 404
+              Format: JSON
+          </p>
+      </body>
+  </html>
+  </DOCTYPE>

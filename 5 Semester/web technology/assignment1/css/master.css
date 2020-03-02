@@ -1,6 +1,8 @@
 /* stylesheet for styling the web page and different screensizes for index.html */
 
+
 /* desktop view */
+
 body {
     font-family: 'Lato', sans-serif;
     margin-left: 15px;
@@ -80,7 +82,7 @@ footer p {
     text-decoration: underline;
 }
 
-.tableInStock{
+.tableInStock {
     border-color: black;
     border-style: solid;
     border-spacing: 2px;
@@ -97,23 +99,22 @@ table {
     vertical-align: text-bottom;
 }
 
-.fillerContainer{
-    height: 70%;
-    background-color: black;
-}
-
-td, th {
+td,
+th {
     border: 1px solid black;
     text-align: center;
     width: 20%;
 }
 
+
 /* every odd child element from tr will get a different color */
+
 tr:nth-child(odd) {
     background-color: #dddddd;
 }
 
-.tableInStock img, .tableOutOfStock img {
+.tableInStock img,
+.tableOutOfStock img {
     height: 200px;
     width: 140px;
 }
@@ -151,77 +152,59 @@ ol {
 
 
 /* mobile portrait */
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px)
-and (orientation: portrait) {
 
-  #navlink:link {
-    margin: 0 5%;
-    vertical-align: middle;
-    font-size: 35px;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
-  h2 {
-    font-size: 25px;
-  }
-
-  pre {
-    display: none;
-  }
-
-  body {
-    font-size: 20px;
-    text-align: center;
-  }
-
-  table {
-    width: 100%;
-    margin: 0;
-  }
-
-  section {
-    margin: 10% 0;
-  }
-
-  /* remove filler text, because it is not needed in mobile/tablet view (it was just for print view) */
-  .fillerText{
-    display: none;
-  }
-
-  .footerText {
-    font-size: 15px !important;
-  }
-
-
-
-/* mobile landscape */
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px)
-and (orientation: landscape) {
-
-  #navlink:link {
-    margin: 0 5%;
-    vertical-align: middle;
-    font-size: 25px;
-  }
-
-  section {
-    margin: 5% 0;
-  }
-
-  table {
-    width: 100%;
-    margin: 0;
-  }
-
-  footer p {
-    font-size: 18px !important;
-  }
-
-  .footerText {
-    font-size: 15px !important;
-  }
-
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
+    #navlink:link {
+        margin: 0 5%;
+        vertical-align: middle;
+        font-size: 35px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 25px;
+    }
+    pre {
+        display: none;
+    }
+    body {
+        font-size: 20px;
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        margin: 0;
+    }
+    section {
+        margin: 10% 0;
+    }
+    /* remove filler text, because it is not needed in mobile/tablet view (it was just for print view) */
+    .fillerText {
+        display: none;
+    }
+    .footerText {
+        font-size: 15px !important;
+    }
+    /* mobile landscape */
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
+        #navlink:link {
+            margin: 0 5%;
+            vertical-align: middle;
+            font-size: 25px;
+        }
+        section {
+            margin: 5% 0;
+        }
+        table {
+            width: 100%;
+            margin: 0;
+        }
+        footer p {
+            font-size: 18px !important;
+        }
+        .footerText {
+            font-size: 15px !important;
+        }
+    }
 }
